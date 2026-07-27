@@ -7,6 +7,8 @@ import AboutUs from "@/components/home/about-us";
 import WhyChooseUs from "@/components/home/why-choose-us";
 import Services from "@/components/home/services";
 import Workflow from "@/components/home/workflow";
+import Certifications from "@/components/shared/certifications";
+import ContactSection from "@/components/shared/contact-section";
 
 export default function Home() {
   // Animation presets
@@ -43,6 +45,12 @@ export default function Home() {
 
       {/* Workflow Section */}
       <Workflow />
+
+      {/* Certifications Section */}
+      <Certifications />
+
+      {/* Contact & Consultation Section */}
+      <ContactSection />
     </main>
   );
 }

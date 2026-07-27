@@ -96,7 +96,7 @@ export default function Hero() {
 
       {/* Rotating Circle Badge (Get Quote) Centered on Angle Intersection (Placed outside clip-path so it's not cut off) */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-30 translate-y-[20%] sm:translate-y-[25%] md:translate-y-[30%]">
-        <CircularBadge logoSrc="/images/logo/f_logo.png" />
+        <CircularBadge logoSrc="/logo/frichebox_icon.svg" />
       </div>
     </div>
   );

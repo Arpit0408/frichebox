@@ -3,20 +3,19 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useScroll } from "@/hooks/use-scroll";
 import { cn } from "@/lib/utils";
-import logoImg from "../../../public/images/logo/frichebox_logo.png";
 
 interface NavLinkProps {
   href: string;
   label: string;
-  active?: boolean;
 }
 
 const navLinks: NavLinkProps[] = [
-  { href: "/", label: "Home", active: true },
+  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/solutions", label: "Solutions" },
   { href: "/infrastructure", label: "Technology & Infrastructure" },
@@ -24,37 +23,47 @@ const navLinks: NavLinkProps[] = [
 ];
 
 export default function Header() {
+  const pathname = usePathname();
   const scrolled = useScroll(10);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const isGlassy = scrolled;
+  const isHome = pathname === "/";
+  // Full width white bg with black text applies on scroll or on non-home pages
+  const isSolidHeader = !isHome || scrolled;
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-500 ease-out py-4 px-4 sm:px-6 md:px-8">
-        <motion.div
-          layout
-          transition={{
-            type: "spring",
-            stiffness: 150,
-            damping: 25,
-            mass: 0.8,
-          }}
-          className={cn(
-            "w-full max-w-7xl flex items-center justify-between transition-all duration-500 ease-out",
-            isGlassy
-              ? "px-4 py-3.5 rounded-2xl bg-white/[0.04] dark:bg-neutral-950/[0.4] border border-white/[0.08] dark:border-white/[0.05] shadow-[0_8px_32px_0_rgba(0,0,0,0.25)] backdrop-blur-md"
-              : "px-4 py-4 bg-transparent border-transparent border-white/0",
-          )}
-        >
+      <header
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-300 ease-out",
+          isSolidHeader
+            ? "w-full bg-white shadow-sm border-b border-neutral-200/80 py-3.5 px-4 sm:px-6 md:px-8"
+            : "w-full bg-transparent py-4 px-4 sm:px-6 md:px-8",
+        )}
+      >
+        <div className="w-full max-w-7xl flex items-center justify-between">
           {/* Logo Section */}
           <Link href="/" className="flex items-center gap-3">
-            {/* Logo Image */}
-            <div className="relative flex-shrink-0 flex items-start justify-start">
+            <div className="relative flex-shrink-0 flex items-center justify-start">
               <Image
-                src={logoImg}
+                src={
+                  isSolidHeader
+                    ? "/logo/frichebox.png"
+                    : "/logo/frichebox_logo_home.svg"
+                }
                 alt="Frichebox Logo"
-                className="h-9 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.15)]"
+                width={180}
+                height={80}
+                className={cn(
+                  "h-12 w-auto object-contain transition-all duration-300",
+                  !isSolidHeader &&
+                    "filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.15)]",
+                )}
                 priority
               />
             </div>
@@ -62,26 +71,38 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1.5">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={cn(
-                  "relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full",
-                  link.active
-                    ? "text-white font-semibold"
-                    : "text-neutral-300 hover:text-white hover:bg-white/[0.03]",
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={cn(
+                    "relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full",
+                    isSolidHeader
+                      ? active
+                        ? "text-black font-semibold "
+                        : "text-neutral-700 hover:text-black"
+                      : active
+                        ? "text-white font-semibold"
+                        : "text-neutral-300 hover:text-white hover:bg-white/[0.05]",
+                  )}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="flex md:hidden p-2 text-neutral-300 hover:text-white focus:outline-none transition-colors"
+            className={cn(
+              "flex md:hidden p-2 focus:outline-none transition-colors rounded-lg",
+              isSolidHeader
+                ? "text-neutral-800 hover:text-black hover:bg-neutral-100"
+                : "text-neutral-300 hover:text-white hover:bg-white/10",
+            )}
             aria-label="Toggle Menu"
           >
             {isMobileMenuOpen ? (
@@ -90,7 +111,7 @@ export default function Header() {
               <FaBars className="text-xl" />
             )}
           </button>
-        </motion.div>
+        </div>
       </header>
 
       {/* Mobile Navigation Drawer */}
@@ -101,27 +122,40 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-lg flex flex-col justify-center px-8"
+            className={cn(
+              "fixed inset-0 z-40 flex flex-col justify-center px-8 backdrop-blur-lg",
+              isSolidHeader ? "bg-white/95" : "bg-black/95",
+            )}
           >
             <nav className="flex flex-col gap-6 text-center">
-              {navLinks.map((link, idx) => (
-                <motion.a
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={cn(
-                    "text-xl font-semibold py-2 transition-all",
-                    link.active
-                      ? "text-white"
-                      : "text-neutral-400 hover:text-white",
-                  )}
-                >
-                  {link.label}
-                </motion.a>
-              ))}
+              {navLinks.map((link, idx) => {
+                const active = isActive(link.href);
+                return (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    key={link.label}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={cn(
+                        "text-xl font-semibold py-2 transition-all block",
+                        isSolidHeader
+                          ? active
+                            ? "text-black font-bold"
+                            : "text-neutral-600 hover:text-black"
+                          : active
+                            ? "text-white font-bold"
+                            : "text-neutral-400 hover:text-white",
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </nav>
           </motion.div>
         )}

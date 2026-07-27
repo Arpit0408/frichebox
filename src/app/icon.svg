@@ -1,0 +1,30 @@
+<svg width="32" height="32" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask id="faviconBadgeMask">
+      <rect x="0" y="0" width="256" height="256" fill="#FFFFFF" />
+      <circle cx="176" cy="184" r="46" fill="#000000" />
+    </mask>
+  </defs>
+
+  <g mask="url(#faviconBadgeMask)" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Top Face -->
+    <path d="M 128 36 L 208 80 L 128 124 L 48 80 Z" fill="none" />
+    
+    <!-- Top Flap Tape Lines -->
+    <path d="M 98 52 L 178 96" stroke="#FFFFFF" stroke-width="10" />
+    <path d="M 118 41 L 198 85" stroke="#FFFFFF" stroke-width="10" />
+
+    <!-- Left Face -->
+    <path d="M 48 80 L 48 176 L 128 220 L 128 124 Z" fill="none" />
+    <path d="M 64 170 L 88 183" stroke="#FFFFFF" stroke-width="10" />
+
+    <!-- Right Face -->
+    <path d="M 128 124 L 208 80 L 208 176 L 128 220 Z" fill="none" />
+  </g>
+
+  <!-- Circular Checkmark Badge (Bottom Right) -->
+  <g>
+    <circle cx="176" cy="184" r="40" fill="none" stroke="#FFFFFF" stroke-width="12" />
+    <path d="M 156 184 L 170 198 L 196 170" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

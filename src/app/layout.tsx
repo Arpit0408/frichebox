@@ -23,6 +23,10 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: "Frichebox - Faster Storage. Smarter Supply.",
   description: "Frichebox delivers secure, high-speed storage and logistics infrastructure.",
+  icons: {
+    icon: "/logo/frichebox_icon.svg",
+    apple: "/logo/frichebox_icon.svg",
+  },
 };
 
 export default function RootLayout({

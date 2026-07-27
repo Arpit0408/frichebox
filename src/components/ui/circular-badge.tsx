@@ -50,13 +50,13 @@ export default function CircularBadge({
         />
 
         <g
-          style={{ 
+          style={{
             transformOrigin: "50px 50px",
-            animationDuration: "20s"
+            animationDuration: "20s",
           }}
           className="animate-spin pointer-events-none"
         >
-          <text className="fill-white text-[7.5px] uppercase font-extrabold tracking-[0.24em] font-manrope">
+          <text className="fill-white text-[7.5px] font-extrabold tracking-[0.24em] font-manrope">
             <textPath href="#badgeCirclePath" startOffset="0%">
               {text}
             </textPath>
@@ -66,14 +66,14 @@ export default function CircularBadge({
         {/* Logo Placement in Center */}
         {logoSrc ? (
           // If a custom image is provided, render it using Next.js Image
-          <g transform="translate(37, 37)" className="pointer-events-none">
-            <foreignObject width="26" height="26">
+          <g transform="translate(31, 31)" className="pointer-events-none">
+            <foreignObject width="38" height="38">
               <div className="w-full h-full flex items-center justify-center">
                 <Image
                   src={logoSrc}
                   alt="Badge Logo"
-                  width={26}
-                  height={26}
+                  width={48}
+                  height={48}
                   className="w-full h-full object-contain"
                 />
               </div>

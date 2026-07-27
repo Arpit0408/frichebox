@@ -1,0 +1,39 @@
+<svg width="512" height="512" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Mask to cut out box lines behind checkmark badge while leaving badge background transparent -->
+    <mask id="badgeMask">
+      <rect x="0" y="0" width="256" height="256" fill="#FFFFFF" />
+      <circle cx="176" cy="184" r="43" fill="#000000" />
+    </mask>
+  </defs>
+
+  <!-- Frichebox Isometric Icon (Light/White Mode vector) -->
+  <g mask="url(#badgeMask)" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Top Face -->
+    <path d="M 128 36 L 208 80 L 128 124 L 48 80 Z" fill="none" />
+    
+    <!-- Top Flap Tape Lines -->
+    <path d="M 98 52 L 178 96" stroke="#FFFFFF" stroke-width="7" />
+    <path d="M 118 41 L 198 85" stroke="#FFFFFF" stroke-width="7" />
+    
+    <!-- Tape Tab / Ribbon on Right Side -->
+    <path d="M 178 96 L 178 114 L 198 103 L 198 85 Z" fill="#FFFFFF" fill-opacity="0.2" stroke="#FFFFFF" stroke-width="6" />
+
+    <!-- Left Face -->
+    <path d="M 48 80 L 48 176 L 128 220 L 128 124 Z" fill="none" />
+    
+    <!-- Left Face Handle/Slit Mark -->
+    <path d="M 64 170 L 88 183" stroke="#FFFFFF" stroke-width="7" />
+
+    <!-- Right Face -->
+    <path d="M 128 124 L 208 80 L 208 176 L 128 220 Z" fill="none" />
+  </g>
+
+  <!-- Circular Checkmark Badge (Bottom Right, Transparent Fill) -->
+  <g>
+    <!-- Badge Background Outline Circle (Transparent Center) -->
+    <circle cx="176" cy="184" r="38" fill="none" stroke="#FFFFFF" stroke-width="9" />
+    <!-- Checkmark Path -->
+    <path d="M 158 184 L 170 196 L 194 172" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

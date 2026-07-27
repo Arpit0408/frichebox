@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SectionHeader } from "@/components/ui/section-header";
 
 interface WorkflowStep {
   id: number;
@@ -62,31 +63,16 @@ export default function Workflow() {
       }}
     >
       <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center">
-        {/* Title Badge */}
-        <motion.span
-          {...fadeIn}
-          className="px-4 py-1.5 text-xs font-bold text-white bg-[#482BE0] rounded-full font-manrope uppercase tracking-[0.15em] shadow-lg shadow-[#482BE0]/20"
-        >
-          The Frischbox Workflow
-        </motion.span>
-
-        {/* Heading */}
-        <motion.h2
-          {...fadeIn}
-          className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-900 text-center leading-tight font-manrope tracking-tight max-w-3xl mt-6"
-        >
-          Zero Errors. Total Precision. From Inbound to Last-Mile.
-        </motion.h2>
-
-        {/* Subtitle */}
-        <motion.p
-          {...fadeIn}
-          className="mt-4 text-base sm:text-lg text-neutral-600 font-manrope font-normal text-center max-w-2xl leading-relaxed"
-        >
-          We've engineered a highly automated, sequential fulfillment workflow
-          that removes manual guesswork, protects your inventory integrity, and
-          accelerates delivery times.
-        </motion.p>
+        <SectionHeader
+          badge="The Frischbox Workflow"
+          badgeVariant="solid"
+          title="Zero Errors. Total Precision. From Inbound to Last-Mile."
+          subtitle="We've engineered a highly automated, sequential fulfillment workflow that removes manual guesswork, protects your inventory integrity, and accelerates delivery times."
+          align="center"
+          maxTitleWidth="max-w-xl"
+          maxSubtitleWidth="max-w-2xl"
+          className="mb-8"
+        />
 
         {/* Main Columns Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-16 w-full items-center">
@@ -111,10 +97,10 @@ export default function Workflow() {
                   key={step.id}
                   layout
                   onClick={() => setActiveStep(isOpen ? null : step.id)}
-                  className={`transition-all duration-300 rounded-[24px] border cursor-pointer select-none overflow-hidden ${
+                  className={`group transition-all duration-300 rounded-[24px] border cursor-pointer select-none overflow-hidden ${
                     isOpen
                       ? "bg-white text-neutral-900 border-neutral-200/80 shadow-lg p-8 md:p-10"
-                      : "bg-[#482BE0] text-white  p-6"
+                      : "bg-[#482BE014] text-neutral-900 hover:bg-[#482BE0] hover:text-white border-transparent p-6"
                   }`}
                 >
                   {/* Step Header */}
@@ -126,7 +112,7 @@ export default function Workflow() {
                       className={`font-manrope font-semibold transition-colors duration-200 ${
                         isOpen
                           ? "text-2xl text-black leading-8"
-                          : "text-xl leading-7"
+                          : "text-xl leading-7 text-neutral-900 group-hover:text-white"
                       }`}
                     >
                       {step.title}
@@ -144,7 +130,7 @@ export default function Workflow() {
                         className="overflow-hidden"
                       >
                         {/* Divider */}
-                        <div className="border-t border-neutral-100 my-4" />
+                        <div className="border-t-2 border-neutral-200 my-5" />
                         <p className="font-inter font-normal text-lg text-[#4B5563] leading-7">
                           {step.description}
                         </p>

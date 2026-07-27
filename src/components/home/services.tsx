@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Check } from "@/components/ui/check";
 import { AnimateIcon } from "@/components/ui/animate-icon";
+import { SectionHeader } from "@/components/ui/section-header";
 
 interface ServiceItem {
   id: number;
@@ -63,8 +64,8 @@ export default function Services() {
     whileInView: { opacity: 1, y: 0 },
     hover: {
       y: -5,
-      transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
-    }
+      transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
+    },
   } as const;
 
   const staggerContainer = {
@@ -84,21 +85,15 @@ export default function Services() {
       <div className="absolute bottom-[20%] right-[-10%] w-[350px] h-[350px] rounded-full bg-[#482BE0]/5 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center">
-        {/* Title Badge */}
-        <motion.span
-          {...fadeIn}
-          className="px-4 py-1.5 text-xs font-bold text-white bg-[#482BE0] rounded-full font-manrope uppercase tracking-[0.15em] shadow-lg shadow-[#482BE0]/20"
-        >
-          Our Services
-        </motion.span>
-
-        {/* Heading */}
-        <motion.h2
-          {...fadeIn}
-          className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white text-center leading-tight font-manrope tracking-tight max-w-3xl mt-6"
-        >
-          Your Trusted Partner for Stress-Free Fulfillment
-        </motion.h2>
+        <SectionHeader
+          theme="dark"
+          badge="Our Services"
+          badgeVariant="solid"
+          title="Your Trusted Partner for Stress-Free Fulfillment"
+          align="center"
+          maxTitleWidth="max-w-lg"
+          className="mb-8"
+        />
 
         {/* Services Cards Grid (3 Columns on Desktop) */}
         <motion.div
