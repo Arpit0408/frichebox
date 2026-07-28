@@ -45,18 +45,16 @@ export default function WhyChooseUs() {
               badgeVariant="subtle"
               title="Every warehouse says 'We have space.' FRICHEBOX says 'We protect your brand.'"
               subtitle="We don't just store your inventory—we act as an extension of your supply chain. By combining specialized, climate-monitored infrastructure with an automated technology stack, we eliminate errors and help your brand stay one step ahead."
-              maxTitleWidth="max-w-xl"
+              maxTitleWidth="max-w-2xl"
               maxSubtitleWidth="max-w-xl"
               className="mb-0"
             />
-
-            {/* Grid Checkmarks (2 Columns) */}
             <motion.div
               variants={staggerContainer}
               initial="initial"
               whileInView="whileInView"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10 w-full"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full"
             >
               {checklistItems.map((item) => (
                 <motion.div

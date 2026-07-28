@@ -13,7 +13,7 @@ export default function SolutionsPage() {
       <Workflow />
       <IndustriesWeServe />
       <FrischboxAdvantage />
-      <Certifications />
+      {/* <Certifications /> */}
     </main>
   );
 }

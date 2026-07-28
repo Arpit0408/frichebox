@@ -36,14 +36,15 @@ export default function PanIndiaReach() {
 
   return (
     <section className="py-20 sm:py-28 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden relative">
-    
-
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* ---------------- Left Column: Content & Features ---------------- */}
-          <motion.div {...fadeIn} className="lg:col-span-6 flex flex-col items-start">
+          <motion.div
+            {...fadeIn}
+            className="lg:col-span-6 flex flex-col items-start"
+          >
             {/* Badge */}
-            <span className="px-4 py-1.5 text-xs font-semibold text-[#5B3AF5] bg-[#F0EBFF] rounded-full font-manrope uppercase tracking-wider mb-4 inline-block">
+            <span className="px-4 py-1.5 text-xs font-semibold text-[#5B3AF5] bg-[#F0EBFF] rounded-full font-manrope capitalize tracking-wider mb-4 inline-block">
               Certified, Compliant & Audit-Ready
             </span>
 
@@ -59,9 +60,10 @@ export default function PanIndiaReach() {
               <strong className="font-bold text-[#111827]">
                 78+ cities and 27,000+ pin codes
               </strong>{" "}
-              across India. Anchored by a 10,000 sq ft Noida HQ, a Delhi node, and
-              regional hubs in Mumbai, Bangalore, Kolkata, and Hyderabad, we ensure
-              complete compliance and product integrity at every location.
+              across India. Anchored by a 10,000 sq ft Noida HQ, a Delhi node,
+              and regional hubs in Mumbai, Bangalore, Kolkata, and Hyderabad, we
+              ensure complete compliance and product integrity at every
+              location.
             </p>
 
             {/* 4 Feature Checklist Items */}
@@ -88,13 +90,14 @@ export default function PanIndiaReach() {
             transition={{ ...fadeIn.transition, delay: 0.2 }}
             className="lg:col-span-6 relative"
           >
-            <div className="w-full h-[380px] sm:h-[460px] lg:h-[520px] rounded-[36px] overflow-hidden shadow-2xl border border-neutral-100">
+            <div className="w-full h-[380px] sm:h-[460px] lg:h-[620px] rounded-[36px] overflow-hidden shadow-2xl border border-neutral-100">
               <img
-                src="/images/infrastructure/pan_india_reach.png"
+                src="/images/infrastructure/pan_india_reach.svg"
                 alt="Pan-India warehouse hubs in Delhi, Mumbai, Bangalore, Kolkata, Hyderabad"
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                className="w-full h-full object-cover "
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = "/images/home/hero_1.png";
+                  (e.target as HTMLImageElement).src =
+                    "/images/home/hero_1.png";
                 }}
               />
             </div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import SectionHeader from "@/components/ui/section-header";
 
 interface WorkflowStep {
   id: number;
@@ -106,26 +107,22 @@ export default function Workflow() {
     >
       <div className="max-w-7xl mx-auto">
         {/* Top Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-16 sm:mb-24">
-          <motion.div {...fadeIn} className="lg:col-span-7 flex flex-col items-start">
-            <span className="px-4 py-1.5 text-xs font-semibold text-white bg-[#5B3AF5] rounded-full font-manrope uppercase tracking-wider mb-4 inline-block">
-              Our Services
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white font-manrope tracking-tight leading-tight">
+        <SectionHeader
+          align="split"
+          theme="dark"
+          badge="Our Services"
+          badgeVariant="solid"
+          badgeClassName="capitalize"
+          title={
+            <>
               The Frischbox Workflow: <br className="hidden sm:inline" />
               End-to-End WMS Operations
-            </h2>
-          </motion.div>
-
-          <motion.div
-            {...fadeIn}
-            className="lg:col-span-5 text-sm sm:text-base text-neutral-300 font-manrope font-normal leading-relaxed"
-          >
-            Powered by our smart WMS, our 5-step workflow guarantees speed and
-            zero-error precision from our receiving docks straight to your
-            customer&apos;s door.
-          </motion.div>
-        </div>
+            </>
+          }
+          subtitle="Powered by our smart WMS, our 5-step workflow guarantees speed and zero-error precision from our receiving docks straight to your customer's door."
+          titleClassName="max-w-xl"
+          className="mb-16 sm:mb-24"
+        />
 
         {/* ---------------- 5-Step Process Timeline Container ---------------- */}
         <div className="relative">
@@ -215,7 +212,9 @@ export default function Workflow() {
                   >
                     <h3
                       className={`text-xl font-bold font-manrope mb-3 tracking-tight transition-colors duration-300 ${
-                        isReached ? "text-white" : "text-neutral-400 group-hover:text-white"
+                        isReached
+                          ? "text-white"
+                          : "text-neutral-400 group-hover:text-white"
                       }`}
                     >
                       {step.title}

@@ -27,7 +27,7 @@ export default function Certifications() {
   } as const;
 
   return (
-    <section className="py-20 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden border-t border-neutral-100">
+    <section className="pb-20 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
         <SectionHeader
           badge="Our Certifications"
@@ -35,7 +35,7 @@ export default function Certifications() {
           title="Certified, Compliant & Audit-Ready"
           subtitle="Rest easy knowing your inventory is backed by complete regulatory compliance. We maintain strict industry standards to ensure product safety, legal security, and absolute peace of mind"
           align="center"
-          maxTitleWidth="max-w-3xl"
+          maxTitleWidth="max-w-4xl"
           maxSubtitleWidth="max-w-3xl"
         />
 

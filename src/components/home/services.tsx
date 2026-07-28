@@ -91,11 +91,9 @@ export default function Services() {
           badgeVariant="solid"
           title="Your Trusted Partner for Stress-Free Fulfillment"
           align="center"
-          maxTitleWidth="max-w-lg"
+          maxTitleWidth="max-w-xl"
           className="mb-8"
         />
-
-        {/* Services Cards Grid (3 Columns on Desktop) */}
         <motion.div
           variants={staggerContainer}
           initial="initial"

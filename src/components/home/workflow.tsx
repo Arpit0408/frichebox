@@ -69,13 +69,13 @@ export default function Workflow() {
           title="Zero Errors. Total Precision. From Inbound to Last-Mile."
           subtitle="We've engineered a highly automated, sequential fulfillment workflow that removes manual guesswork, protects your inventory integrity, and accelerates delivery times."
           align="center"
-          maxTitleWidth="max-w-xl"
-          maxSubtitleWidth="max-w-2xl"
+          maxTitleWidth="max-w-2xl"
+          maxSubtitleWidth="max-w-3xl"
           className="mb-8"
         />
 
         {/* Main Columns Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-16 w-full items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full items-center">
           {/* Left Column: Image Area */}
           <motion.div
             {...fadeIn}

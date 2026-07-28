@@ -72,7 +72,7 @@ export default function KeyStrengths() {
             {...fadeIn}
             className="lg:col-span-7 flex flex-col items-start"
           >
-            <span className="px-4 py-1.5 text-xs font-semibold text-[#5B3AF5] bg-[#F0EBFF] rounded-full font-manrope uppercase tracking-wider mb-4 inline-block">
+            <span className="px-4 py-1.5 text-xs font-semibold text-[#5B3AF5] bg-[#F0EBFF] rounded-full font-manrope capitalize tracking-wider mb-4 inline-block">
               Key Strengths
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#111827] font-manrope tracking-tight leading-tight">

@@ -49,8 +49,14 @@ export default function ContactSection() {
         backgroundImage: "url('/work_bg.png')",
       }}
     >
-      {/* Subtle backdrop tint overlay across full width */}
-      <div className="absolute inset-0 bg-slate-900/10 backdrop-blur-[1px] pointer-events-none" />
+      {/* Linear gradient overlay on background image */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(72, 43, 224, 0.18) 0%, rgba(39, 23, 122, 0.18) 100%)",
+        }}
+      />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
@@ -59,11 +65,9 @@ export default function ContactSection() {
             {...fadeIn}
             className="lg:col-span-6 flex flex-col justify-between bg-white/45 backdrop-blur-xl border border-white/60 shadow-xl rounded-3xl p-8 sm:p-10 relative overflow-hidden"
           >
-         
-
             <div className="relative z-10">
               {/* Top Badge */}
-              <span className="px-4 py-1.5 text-xs font-bold text-white bg-[#5B3AF5] rounded-full font-manrope uppercase tracking-wider inline-block mb-6 shadow-md shadow-[#5B3AF5]/25">
+              <span className="px-4 py-1.5 text-xs font-bold text-white bg-[#5B3AF5] rounded-full font-manrope capitalize tracking-wider inline-block mb-6 shadow-md shadow-[#5B3AF5]/25">
                 Work With Us
               </span>
 
@@ -136,7 +140,6 @@ export default function ContactSection() {
             {...fadeIn}
             className="lg:col-span-6 bg-white/95 backdrop-blur-xl border border-white/80 shadow-2xl rounded-3xl p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden"
           >
-            
             <div className="relative z-10">
               <h3 className="text-2xl sm:text-3xl font-extrabold text-[#111827] font-manrope tracking-tight mb-8">
                 Schedule a Fulfillment Consultation
@@ -202,7 +205,7 @@ export default function ContactSection() {
                 {/* Row 3: Message Textarea */}
                 <div>
                   <textarea
-                    rows={4}
+                    rows={8}
                     required
                     placeholder="Message"
                     value={formData.message}

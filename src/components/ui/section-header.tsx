@@ -8,7 +8,7 @@ export interface SectionHeaderProps {
   badge?: string;
   title: React.ReactNode;
   subtitle?: React.ReactNode;
-  align?: "left" | "center" | "right";
+  align?: "left" | "center" | "right" | "split";
   theme?: "light" | "dark";
   badgeVariant?: "solid" | "subtle" | "purple";
   className?: string;
@@ -26,7 +26,7 @@ export function SectionHeader({
   subtitle,
   align = "center",
   theme = "light",
-  badgeVariant = "subtle",
+  badgeVariant = "purple",
   className,
   titleClassName,
   subtitleClassName,
@@ -42,22 +42,71 @@ export function SectionHeader({
     transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
   } as const;
 
-  const isCenter = align === "center";
-  const isRight = align === "right";
-
   const getBadgeStyle = () => {
     switch (badgeVariant) {
       case "solid":
-        return "bg-[#482BE0] text-white shadow-md shadow-[#482BE0]/20 uppercase tracking-[0.15em]";
+        return "bg-[#5B3AF5] text-white shadow-md shadow-[#5B3AF5]/20 capitalize tracking-wider font-semibold";
       case "purple":
-        return "bg-[#F0EBFF] text-[#6C47FF] uppercase tracking-wider font-semibold";
       case "subtle":
       default:
-        return "bg-indigo-50 text-[#482BE0] uppercase tracking-wider font-semibold";
+        return "bg-[#F0EBFF] text-[#5B3AF5] capitalize tracking-wider font-semibold";
     }
   };
 
   const Wrapper = animate ? motion.div : "div";
+
+  // 2-Column Split Layout for Header + Side Description
+  if (align === "split") {
+    return (
+      <Wrapper
+        {...(animate ? fadeIn : {})}
+        className={cn(
+          "grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-14 sm:mb-16 w-full",
+          className
+        )}
+      >
+        <div className="lg:col-span-7 flex flex-col items-start text-left">
+          {badge && (
+            <span
+              className={cn(
+                "px-4 py-1.5 text-xs rounded-full font-manrope mb-4 inline-block",
+                getBadgeStyle(),
+                badgeClassName
+              )}
+            >
+              {badge}
+            </span>
+          )}
+          <h2
+            className={cn(
+              "text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight font-manrope tracking-tight",
+              theme === "dark" ? "text-white" : "text-[#111827]",
+              titleClassName
+            )}
+          >
+            {title}
+          </h2>
+        </div>
+
+        {subtitle && (
+          <div className="lg:col-span-5 text-sm sm:text-base font-manrope font-normal leading-relaxed text-left">
+            <p
+              className={cn(
+                theme === "dark" ? "text-neutral-300" : "text-[#4B5563]",
+                subtitleClassName
+              )}
+            >
+              {subtitle}
+            </p>
+          </div>
+        )}
+      </Wrapper>
+    );
+  }
+
+  // Standard Stacked Layout (Left, Center, Right)
+  const isCenter = align === "center";
+  const isRight = align === "right";
 
   return (
     <Wrapper
@@ -74,7 +123,7 @@ export function SectionHeader({
       {badge && (
         <span
           className={cn(
-            "px-4 py-1.5 text-xs font-bold rounded-full font-manrope mb-4 inline-block",
+            "px-4 py-1.5 text-xs rounded-full font-manrope mb-4 inline-block",
             getBadgeStyle(),
             badgeClassName
           )}
@@ -87,7 +136,7 @@ export function SectionHeader({
       <h2
         className={cn(
           "text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight font-manrope tracking-tight",
-          theme === "dark" ? "text-white" : "text-[#1A1A1A]",
+          theme === "dark" ? "text-white" : "text-[#111827]",
           maxTitleWidth,
           titleClassName
         )}
@@ -99,8 +148,8 @@ export function SectionHeader({
       {subtitle && (
         <p
           className={cn(
-            "mt-4 text-base sm:text-lg font-manrope font-normal leading-relaxed",
-            theme === "dark" ? "text-neutral-300" : "text-neutral-600",
+            "mt-4 text-sm sm:text-base md:text-lg font-manrope font-normal leading-relaxed",
+            theme === "dark" ? "text-neutral-300" : "text-[#4B5563]",
             maxSubtitleWidth,
             subtitleClassName
           )}

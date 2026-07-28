@@ -4,13 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaLinkedinIn } from "react-icons/fa";
 import TopFooter from "@/components/layout/top-footer";
-import logoImg from "../../../public/images/logo/frichebox_logo.png";
+import logoImg from "../../../public/logo/frichebox_logo_home.svg";
 
 export default function Footer() {
   return (
     <div className="w-full flex flex-col z-10 relative">
       <TopFooter />
-      <footer className="relative bg-[#050312] text-white border-t border-white/[0.06] py-16 sm:py-20 px-6 sm:px-8 lg:px-12 font-manrope">
+      <footer className="relative bg-[#050312] text-white border-t border-white/[0.06] pt-8 pb-8 sm:pt-16 sm:pb-6 px-8 sm:px-8 lg:px-12 font-manrope">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 lg:gap-16 items-start">
             {/* Column 1: Logo, Tagline & Social Link */}
@@ -115,7 +115,7 @@ export default function Footer() {
           </div>
 
           {/* Bottom Copyright Divider */}
-          <div className="mt-16 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-neutral-500 font-manrope">
+          <div className="mt-16 pt-4 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-neutral-500 font-manrope">
             <span>
               &copy; {new Date().getFullYear()} FRICHEBOX. All rights reserved.
             </span>

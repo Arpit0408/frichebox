@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import CircularBadge from "@/components/ui/circular-badge";
 
 interface BreadcrumbItem {
   label: string;
@@ -13,19 +13,18 @@ export interface PageHeaderProps {
   title: string;
   description?: string;
   badge?: string;
+  badgeText?: string;
   breadcrumb?: BreadcrumbItem[];
   className?: string;
+  showCircularBadge?: boolean;
 }
 
 export default function PageHeader({
   title,
   description,
   badge,
-  breadcrumb = [
-    { label: "Home", href: "/" },
-    { label: title, href: "#" },
-  ],
   className,
+  showCircularBadge = true,
 }: PageHeaderProps) {
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -33,18 +32,22 @@ export default function PageHeader({
     transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
   } as const;
 
+  const scrollToNext = () => {
+    window.scrollTo({
+      top: 450,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section
       className={cn(
-        "relative w-full pt-32 pb-16 md:pt-40 md:pb-24 px-6 sm:px-8 lg:px-12 text-white overflow-hidden",
-        className
+        "relative w-full pt-28 pb-20 sm:pt-36 sm:pb-24 px-6 sm:px-8 lg:px-12 text-white overflow-visible mb-14 sm:mb-20",
+        className,
       )}
       style={{
         background: "linear-gradient(94.25deg, #050312 6.69%, #482BE0 163.59%)",
-        borderBottom: "12px solid",
-        borderImageSource:
-          "linear-gradient(90deg, #482BE0 0%, #A495F0 50%, #A397DD 80.77%, #FFFFFF 100%)",
-        borderImageSlice: 1,
+        borderBottom: "6px solid #5B3AF5",
       }}
     >
       {/* Decorative Glow Lights */}
@@ -56,7 +59,7 @@ export default function PageHeader({
         {badge && (
           <motion.span
             {...fadeIn}
-            className="px-4 py-1.5 text-xs font-bold text-white bg-[#482BE0] rounded-full font-manrope uppercase tracking-[0.15em] shadow-lg shadow-[#482BE0]/25 mb-4 inline-block"
+            className="px-4 py-1.5 text-xs font-bold text-white bg-[#5B3AF5] rounded-full font-manrope capitalize tracking-[0.15em] shadow-lg shadow-[#5B3AF5]/25 mb-4 inline-block"
           >
             {badge}
           </motion.span>
@@ -81,6 +84,16 @@ export default function PageHeader({
           </motion.p>
         )}
       </div>
+
+      {/* Centered Rotating Circular Badge on Bottom Border */}
+      {showCircularBadge && (
+        <div
+          onClick={scrollToNext}
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-30 cursor-pointer"
+        >
+          <CircularBadge logoSrc="/logo/frichebox_icon.svg" />
+        </div>
+      )}
     </section>
   );
 }

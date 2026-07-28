@@ -32,7 +32,8 @@ const defaultFaqs: FaqItem[] = [
   },
   {
     id: 3,
-    question: "Which e-commerce platforms and marketplaces do you integrate with?",
+    question:
+      "Which e-commerce platforms and marketplaces do you integrate with?",
     answer:
       "We offer seamless 1-click automated integrations with Shopify, WooCommerce, Amazon, Flipkart, Myntra, Nykaa, and custom enterprise ERP systems.",
   },
@@ -86,12 +87,13 @@ export default function FaqSection({
       className={`py-20 sm:py-24 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden relative ${className}`}
     >
       <div className="max-w-6xl mx-auto relative z-10">
-       
-
         {/* Section Header */}
-        <motion.div {...fadeIn} className="flex flex-col items-start mb-12 relative z-10">
+        <motion.div
+          {...fadeIn}
+          className="flex flex-col items-start mb-12 relative z-10"
+        >
           {badge && (
-            <span className="px-4 py-1.5 text-xs font-semibold text-[#5B3AF5] bg-[#F0EBFF] rounded-full font-manrope uppercase tracking-wider mb-4 inline-block">
+            <span className="px-4 py-1.5 text-xs font-semibold text-[#5B3AF5] bg-[#F0EBFF] rounded-full font-manrope capitalize tracking-wider mb-4 inline-block">
               {badge}
             </span>
           )}
@@ -101,7 +103,10 @@ export default function FaqSection({
         </motion.div>
 
         {/* FAQ Accordion List */}
-        <motion.div {...fadeIn} className="divide-y divide-neutral-200 border-t border-b border-neutral-200 relative z-10">
+        <motion.div
+          {...fadeIn}
+          className="divide-y divide-neutral-200 border-t border-b border-neutral-200 relative z-10"
+        >
           {items.map((item) => {
             const isOpen = openId === item.id;
             return (

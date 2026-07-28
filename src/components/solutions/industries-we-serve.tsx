@@ -56,43 +56,27 @@ export default function IndustriesWeServe() {
     <section className="py-20 sm:py-28 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden relative">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* ---------------- Left Column: Overlapping Photos ---------------- */}
+          {/* ---------------- Left Column: Single Photo Card ---------------- */}
           <motion.div
             {...fadeIn}
-            className="lg:col-span-6 relative w-full h-[420px] sm:h-[500px] lg:h-[540px]"
+            className="lg:col-span-6 relative w-full h-[380px] sm:h-[480px] lg:h-[620px] "
           >
-            {/* Top Left Image */}
-            <div className="absolute top-0 left-0 w-[68%] sm:w-[65%] h-[68%] sm:h-[65%] rounded-[28px] sm:rounded-[36px] overflow-hidden shadow-xl border-4 border-white z-10 transform -rotate-1 hover:rotate-0 transition-transform duration-500">
-              <img
-                src="/images/about/about_story_1.png"
-                alt="Frichebox warehouse supervisor inspecting inventory"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src =
-                    "/images/home/hero_1.png";
-                }}
-              />
-            </div>
-
-            {/* Bottom Right Overlapping Image */}
-            <div className="absolute bottom-0 right-0 w-[68%] sm:w-[65%] h-[68%] sm:h-[65%] rounded-[28px] sm:rounded-[36px] overflow-hidden shadow-2xl border-4 border-white z-20 transform rotate-1 hover:rotate-0 transition-transform duration-500">
-              <img
-                src="/images/about/about_story_2.png"
-                alt="Cold storage facility operator opening temperature controlled unit"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src =
-                    "/images/home/about_warehouse.png";
-                }}
-              />
-            </div>
+            <img
+              src="/images/solutions/solutions_story.png"
+              alt="Frichebox Industries We Serve Fulfillment Operations"
+              className="w-full h-full object-contain"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src =
+                  "/images/solutions/about_story_1.svg";
+              }}
+            />
           </motion.div>
 
           {/* ---------------- Right Column: Header & Accordion Pills ---------------- */}
           <div className="lg:col-span-6 flex flex-col justify-center">
             {/* Badge */}
             <motion.div {...fadeIn} className="mb-4">
-              <span className="px-4 py-1.5 text-xs font-semibold text-[#5B3AF5] bg-[#F0EBFF] rounded-full font-manrope uppercase tracking-wider inline-block">
+              <span className="px-4 py-1.5 text-xs font-semibold text-[#5B3AF5] bg-[#F0EBFF] rounded-full font-manrope capitalize tracking-wider inline-block">
                 About Us
               </span>
             </motion.div>

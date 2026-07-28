@@ -13,7 +13,8 @@ const advantageData: AdvantageItem[] = [
   {
     id: 1,
     title: "Aviation-Inspired Precision",
-    description: "Built on rigorous, zero-error SOPs to ensure flawless handling.",
+    description:
+      "Built on rigorous, zero-error SOPs to ensure flawless handling.",
   },
   {
     id: 2,
@@ -63,7 +64,7 @@ export default function FrischboxAdvantage() {
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <motion.div {...fadeIn} className="text-center mb-16 sm:mb-20">
-          <span className="px-5 py-2 text-xs font-semibold text-white bg-[#5B3AF5] rounded-full font-manrope uppercase tracking-wider mb-4 inline-block shadow-md">
+          <span className="px-5 py-2 text-xs font-semibold text-white bg-[#5B3AF5] rounded-full font-manrope capitalize tracking-wider mb-4 inline-block shadow-md">
             An Extension of Your Supply Chain
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#111827] font-manrope tracking-tight">

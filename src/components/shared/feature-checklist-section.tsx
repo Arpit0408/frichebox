@@ -90,7 +90,7 @@ export default function FeatureChecklistSection({
     <section
       className={cn(
         "py-16 sm:py-24 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden relative",
-        className
+        className,
       )}
     >
       <div className="max-w-7xl mx-auto">
@@ -100,18 +100,16 @@ export default function FeatureChecklistSection({
             {...fadeIn}
             className={cn(
               "lg:col-span-6 flex flex-col items-start relative z-10",
-              !isImageRight && "lg:order-2"
+              !isImageRight && "lg:order-2",
             )}
           >
-           
-
             <div className="relative z-10 w-full">
               {/* Badge */}
               {badge && (
                 <span
                   className={cn(
-                    "px-4 py-1.5 text-xs font-semibold rounded-full font-manrope uppercase tracking-wider mb-5 inline-block",
-                    getBadgeStyle()
+                    "px-4 py-1.5 text-xs font-semibold rounded-full font-manrope capitalize tracking-wider mb-5 inline-block",
+                    getBadgeStyle(),
                   )}
                 >
                   {badge}
@@ -175,7 +173,7 @@ export default function FeatureChecklistSection({
             {...fadeIn}
             className={cn(
               "lg:col-span-6 lg:sticky lg:top-28 relative w-full aspect-[4/3] sm:aspect-[14/11] overflow-hidden rounded-3xl sm:rounded-[32px] shadow-2xl group border border-neutral-100 self-start",
-              !isImageRight && "lg:order-1"
+              !isImageRight && "lg:order-1",
             )}
           >
             <img

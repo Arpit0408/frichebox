@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { LuBriefcase, LuCircleCheck, LuBuilding2 } from "react-icons/lu";
-import { SectionHeader } from "@/components/ui/section-header";
+import SectionHeader from "@/components/ui/section-header";
 
 export default function AboutUs() {
   // Animation presets for scroll reveal
@@ -26,36 +26,18 @@ export default function AboutUs() {
   return (
     <section className="py-24 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        {/* Header Section (2-Column Grid on Desktop) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-16">
-          <div className="lg:col-span-7 flex flex-col items-start">
-            <SectionHeader
-              align="left"
-              badge="About Us"
-              badgeVariant="subtle"
-              title={
-                <>
-                  Our Journey: Excellence <br className="hidden lg:block" /> In Health & Wellness <br className="hidden lg:block" /> Logistics
-                </>
-              }
-              className="mb-0"
-            />
-          </div>
-
-          <motion.div {...fadeIn} className="lg:col-span-5 lg:pb-2">
-            {/* Description Text */}
-            <p className="text-base text-[#4A4A4A] font-manrope font-normal leading-relaxed">
-              Frischbox wasn't created just to rent space. We built it after
-              realizing existing Indian warehouses lacked the absolute
-              cleanliness, strict discipline, and advanced tech demanded by
-              global brands. Instead of compromising, we built the solution.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Content Section (3-Column Grid on Desktop) */}
+        <SectionHeader
+          align="split"
+          badge="About Us"
+          badgeVariant="purple"
+          title={
+            <>
+              Our Journey: Excellence In Health &amp; Wellness <br className="hidden lg:inline" /> Logistics
+            </>
+          }
+          subtitle="Frischbox wasn't created just to rent space. We built it after realizing existing Indian warehouses lacked the absolute cleanliness, strict discipline, and advanced tech demanded by global brands. Instead of compromising, we built the solution."
+        />
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Column 1: Stats Card (col-span-3) */}
           <motion.div
             variants={staggerContainer}
             initial="initial"
@@ -165,7 +147,7 @@ export default function AboutUs() {
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-extrabold text-[#1A1A1A] font-manrope leading-snug">
-                  Fully Compliant & Certified Storage
+                  Fully Compliant &amp; Certified Storage
                 </h3>
                 <p className="text-sm text-[#4A4A4A] font-manrope font-normal mt-2 leading-relaxed">
                   Safeguard product integrity in an FSSAI-licensed,
