@@ -1,30 +1,26 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 interface CheckProps {
   className?: string;
   animateOnHover?: boolean;
 }
 
-const pathVariants = {
-  initial: { pathLength: 0, opacity: 0 },
+const pathVariants: Variants = {
+  initial: { pathLength: 1, opacity: 1 },
   visible: {
     pathLength: 1,
     opacity: 1,
-    transition: {
-      pathLength: { type: "spring" as const, stiffness: 90, damping: 15 },
-      opacity: { duration: 0.2 }
-    }
   },
   hover: {
     pathLength: [0, 1],
     opacity: 1,
     transition: {
-      pathLength: { type: "spring" as const, stiffness: 100, damping: 12 },
-      opacity: { duration: 0.1 }
-    }
-  }
+      duration: 0.3,
+      ease: "easeInOut",
+    },
+  },
 };
 
 export function Check({ className = "w-5 h-5", animateOnHover = false }: CheckProps) {

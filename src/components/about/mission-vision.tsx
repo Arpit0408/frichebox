@@ -73,7 +73,7 @@ export default function MissionVision({
             >
               <img
                 src={operatorsImage}
-                alt="Frichebox Warehouse Operators Working in Aisle"
+                alt="Frischbox Warehouse Operators Working in Aisle"
                 className="w-full h-full object-cover rounded-[28px] transition-transform duration-700 group-hover:scale-105"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src =
@@ -114,7 +114,7 @@ export default function MissionVision({
                 {/* Background Image with Gradient Overlay */}
                 <img
                   src={ctaBgImage}
-                  alt="Frichebox Logistics Work With Us"
+                  alt="Frischbox Logistics Work With Us"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src =

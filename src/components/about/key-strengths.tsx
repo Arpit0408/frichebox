@@ -23,8 +23,7 @@ const defaultStrengths: StrengthCard[] = [
   {
     id: 2,
     title: "Technology",
-    description:
-      "Powered by an advanced, automated smart warehouse WMS stack.",
+    description: "Powered by an advanced, automated smart warehouse WMS stack.",
     icon: LuTruck,
     iconPath: "/icons/technology.svg",
   },
@@ -97,7 +96,7 @@ export default function KeyStrengths() {
           initial="initial"
           whileInView="whileInView"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch"
+          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch"
         >
           {defaultStrengths.map((item) => {
             const IconComponent = item.icon;
@@ -105,21 +104,21 @@ export default function KeyStrengths() {
               <motion.div
                 key={item.id}
                 variants={fadeIn}
-                className="group relative bg-white hover:bg-[#482BE0] p-8 sm:p-9 shadow-lg hover:shadow-2xl border-b-4 border-[#482BE0] hover:border-[#482BE0] transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-start overflow-hidden cursor-pointer min-h-[420px] sm:min-h-[440px]"
+                className="group relative bg-white hover:bg-[#482BE0] p-4 sm:p-6 md:p-8 sm:p-9 shadow-lg hover:shadow-2xl border-b-4 border-[#482BE0] hover:border-[#482BE0] transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-start overflow-hidden cursor-pointer min-h-[220px] sm:min-h-[440px]"
               >
                 {/* Background Watermark Graphic in Top Right */}
-                <div className="absolute right-[-10%] top-[-5%] text-[#482BE0]/[0.07] group-hover:text-white/[0.08] select-none pointer-events-none transition-colors duration-300">
-                  <IconComponent className="w-36 h-36 stroke-[1.2]" />
+                <div className="hidden sm:block absolute right-[-10%] top-[-5%] text-[#482BE0]/[0.07] group-hover:text-white/[0.08] select-none pointer-events-none transition-colors duration-300">
+                  <IconComponent className="sm:w-36 sm:h-36 stroke-[1.2]" />
                 </div>
 
                 <div className="relative z-10 flex flex-col items-start w-full">
                   {/* Top Icon */}
                   <div className="mb-12 text-[#482BE0] group-hover:text-white transition-colors duration-300">
-                    <IconComponent className="w-16 h-16 stroke-[1.5]" />
+                    <IconComponent className="w-10 h-10 sm:w-16 sm:h-16 stroke-[1.5]" />
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-2xl sm:text-3xl font-bold font-manrope text-[#111827] group-hover:text-white mb-4 transition-colors duration-300 leading-tight">
+                  <h3 className="text-xl sm:text-3xl font-bold font-manrope text-[#111827] group-hover:text-white mb-2 sm:mb-4 transition-colors duration-300 leading-tight">
                     {item.title}
                   </h3>
 

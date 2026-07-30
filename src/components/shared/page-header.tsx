@@ -42,7 +42,7 @@ export default function PageHeader({
   return (
     <section
       className={cn(
-        "relative w-full pt-28 pb-20 sm:pt-36 sm:pb-24 px-6 sm:px-8 lg:px-12 text-white overflow-visible mb-14 sm:mb-20",
+        "relative w-full pt-28 pb-20 sm:pt-36 sm:pb-24 px-6 sm:px-8 lg:px-12 text-white overflow-visible mb-4 sm:mb-20",
         className,
       )}
       style={{
@@ -51,8 +51,8 @@ export default function PageHeader({
       }}
     >
       {/* Decorative Glow Lights */}
-      <div className="absolute top-[-20%] right-[-10%] w-[450px] h-[450px] rounded-full bg-[#482BE0]/20 blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-violet-600/15 blur-[120px] pointer-events-none" />
+      <div className="absolute top-[-20%] right-[-10%] w-[450px] h-[450px] rounded-full  blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full  blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
         {/* Optional Badge */}

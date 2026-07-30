@@ -44,7 +44,7 @@ const steps: WorkflowStep[] = [
 ];
 
 export default function Workflow() {
-  const [activeStep, setActiveStep] = useState<number | null>(null);
+  const [activeStep, setActiveStep] = useState<number | null>(1);
 
   // Fade-in animations
   const fadeIn = {
@@ -56,7 +56,7 @@ export default function Workflow() {
 
   return (
     <section
-      className="py-24 px-6 sm:px-8 lg:px-12 rounded-[30px] overflow-hidden my-16 mx-4 sm:mx-6 lg:mx-8 relative"
+      className="py-12 sm:py-24 px-4 sm:px-8 lg:px-12 rounded-[30px] overflow-hidden my-8 sm:my-16 mx-auto max-w-[calc(100%-1.5rem)] sm:max-w-7xl relative"
       style={{
         background: "linear-gradient(180deg, #482BE0 -135.39%, #FFFFFF 52.17%)",
         boxShadow: "inset 0px -318px 107.5px 0px #FFFFFF",
@@ -83,7 +83,7 @@ export default function Workflow() {
           >
             <img
               src="/images/home/workflow.png"
-              alt="Frichebox Warehouse operator checking logistics processes"
+              alt="Frischbox Warehouse operator checking logistics processes"
               className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
             />
           </motion.div>

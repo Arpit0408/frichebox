@@ -30,7 +30,7 @@ export default function AboutStory({
             <div className="absolute top-0 left-0 w-[68%] sm:w-[76%] overflow-hidden ">
               <img
                 src={image1}
-                alt="Frichebox Team Working in Warehouse Racks"
+                alt="Frischbox Team Working in Warehouse Racks"
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src =
@@ -42,7 +42,7 @@ export default function AboutStory({
             <div className="absolute bottom-0 right-0 w-[62%] sm:w-[50%] aspect-[5/5] overflow-hidden  z-20 ">
               <img
                 src={image2}
-                alt="Frichebox Warehouse Manager with Clipboard"
+                alt="Frischbox Warehouse Manager with Clipboard"
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src =

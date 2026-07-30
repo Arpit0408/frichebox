@@ -20,7 +20,7 @@ const techTabsData: TechTabItem[] = [
     description:
       "We utilise a comprehensive smart warehouse automation stack powered by advanced WMS platforms to maximise speed and accuracy across all operations. This includes AI-driven order allocation to eliminate errors and auto e-Waybill generation for streamlined, compliant dispatch.",
     imageSrc: "/images/infrastructure/tab_wms.svg",
-    fallbackImage: "/images/about/frichebox_tracking.png",
+    fallbackImage: "/images/about/Frischbox_tracking.png",
   },
   {
     id: 2,
@@ -101,58 +101,77 @@ export default function TechInfrastructureTabs() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTabId(tab.id)}
-                    className={`w-full text-left py-3.5 px-6 rounded-xl font-manrope font-semibold text-xs sm:text-sm transition-all duration-300 transform active:scale-98 cursor-pointer ${
+                    className={`relative w-full text-left py-3.5 px-6 rounded-xl font-manrope font-semibold text-xs sm:text-sm transition-colors duration-200 cursor-pointer overflow-hidden ${
                       isActive
-                        ? "bg-[#5B3AF5] text-white shadow-lg shadow-[#5B3AF5]/40"
-                        : "bg-white text-[#111827] hover:bg-[#5B3AF5] hover:text-white"
+                        ? "text-white shadow-lg shadow-[#5B3AF5]/40"
+                        : "bg-white text-[#111827] hover:bg-[#f2f2f2] hover:text-[#111827]"
                     }`}
                   >
-                    {tab.label}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeTabBg"
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 30,
+                        }}
+                        className="absolute inset-0 bg-[#5B3AF5] z-0 rounded-xl"
+                      />
+                    )}
+                    <span className="relative z-10">{tab.label}</span>
                   </button>
                 );
               })}
             </div>
           </motion.div>
 
-          {/* ---------------- Right Column: Animated Preview Card ---------------- */}
           <motion.div
             {...fadeIn}
             transition={{ ...fadeIn.transition, delay: 0.2 }}
             className="lg:col-span-5 w-full"
           >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentTab.id}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="bg-white rounded-[32px] overflow-hidden shadow-2xl text-neutral-900  flex flex-col"
-              >
-                {/* Top Image */}
-                <div className="h-[250px] sm:h-[300px] w-full overflow-hidden relative ">
-                  <img
+            {/* Static Permanent Outer White Card */}
+            <div className="bg-white rounded-[32px] overflow-hidden shadow-2xl text-neutral-900 flex flex-col border border-neutral-100">
+              {/* Top Image Slot */}
+              <div className="h-[250px] sm:h-[300px] w-full overflow-hidden relative bg-neutral-100">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentTab.id}
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
                     src={currentTab.imageSrc}
                     alt={currentTab.cardTitle}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover absolute inset-0"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src =
                         currentTab.fallbackImage;
                     }}
                   />
-                </div>
+                </AnimatePresence>
+              </div>
 
-                {/* Card Content Area */}
-                <div className="p-8 sm:p-10 flex flex-col bg-white">
-                  <h3 className="text-xl sm:text-2xl font-bold font-manrope text-[#111827] mb-3 leading-snug">
-                    {currentTab.cardTitle}
-                  </h3>
-                  <p className="text-xs sm:text-sm font-manrope text-[#4B5563] leading-relaxed">
-                    {currentTab.description}
-                  </p>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+              {/* Card Content Area */}
+              <div className="p-8 sm:p-10 flex flex-col bg-white min-h-[190px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentTab.id}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.35, ease: "easeInOut" }}
+                  >
+                    <h3 className="text-xl sm:text-2xl font-bold font-manrope text-[#111827] mb-3 leading-snug">
+                      {currentTab.cardTitle}
+                    </h3>
+                    <p className="text-xs sm:text-sm font-manrope text-[#4B5563] leading-relaxed">
+                      {currentTab.description}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>

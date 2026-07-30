@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { LuCheck } from "react-icons/lu";
+import Counter from "@/components/ui/counter";
+import MagneticButton from "@/components/ui/magnetic-button";
 
 interface InfrastructureOverviewProps {
   topImageSrc?: string;
@@ -10,7 +12,7 @@ interface InfrastructureOverviewProps {
 
 export default function InfrastructureOverview({
   topImageSrc = "/images/infrastructure/tab_wms.svg",
-  bottomRightImageSrc = "/images/about/frichebox_tracking.png",
+  bottomRightImageSrc = "/images/about/Frischbox_tracking.png",
 }: InfrastructureOverviewProps) {
   const fadeIn = {
     initial: { opacity: 0, y: 30 },
@@ -63,13 +65,13 @@ export default function InfrastructureOverview({
               ))}
             </div>
 
-            {/* CTA Button */}
-            <a
+            {/* CTA Button with Magnetic Cursor Attraction */}
+            <MagneticButton
               href="/contact"
-              className="px-8 py-3.5 rounded-2xl bg-[#482BE0] hover:bg-[#3b21c4] text-white font-manrope font-semibold text-sm shadow-lg shadow-[#482BE0]/30 hover:shadow-xl hover:shadow-[#482BE0]/40 transition-all transform active:scale-95 cursor-pointer inline-block"
+              className="px-8 py-3.5 rounded-2xl bg-[#482BE0] hover:bg-[#3b21c4] text-white font-manrope font-semibold text-sm shadow-lg shadow-[#482BE0]/30 hover:shadow-xl hover:shadow-[#482BE0]/40 transition-all cursor-pointer inline-block"
             >
               Book a Warehouse Tour
-            </a>
+            </MagneticButton>
           </motion.div>
 
           {/* ---------------- Right Column: Exact 1:1 Matching Bento Frame (Image 1 Target) ---------------- */}
@@ -92,7 +94,7 @@ export default function InfrastructureOverview({
             >
               <img
                 src={topImageSrc}
-                alt="Frichebox warehouse facility overview"
+                alt="Frischbox warehouse facility overview"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src =
@@ -104,7 +106,7 @@ export default function InfrastructureOverview({
             {/* 2. BOTTOM-LEFT SOLID PURPLE STAT CARD */}
             <div className="absolute bottom-0 left-0 w-[55%] sm:w-[56%] h-[165px] sm:h-[180px] bg-[#482BE0] text-white p-6 sm:p-8 rounded-[28px] sm:rounded-[32px] shadow-xl border border-white/20 flex flex-col justify-center items-start z-20">
               <h3 className="text-2xl sm:text-3xl font-extrabold font-manrope text-white mb-2 leading-tight">
-                10,000 Sq Ft
+                <Counter value={10000} suffix=" Sq Ft" />
               </h3>
               <p className="text-xs sm:text-sm font-manrope text-white/90 leading-snug">
                 Expandable, Built-for-Precision Facility
@@ -115,11 +117,11 @@ export default function InfrastructureOverview({
             <div className="absolute bottom-0 right-0 w-[41%] sm:w-[42%] h-[260px] sm:h-[265px] rounded-[28px] sm:rounded-[32px] overflow-hidden shadow-2xl border border-neutral-100 group z-20">
               <img
                 src={bottomRightImageSrc}
-                alt="Frichebox WMS software and inventory tracking"
+                alt="Frischbox WMS software and inventory tracking"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src =
-                    "/images/about/frichebox_tracking.png";
+                    "/images/about/Frischbox_tracking.png";
                 }}
               />
             </div>

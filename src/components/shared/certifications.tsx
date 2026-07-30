@@ -39,10 +39,41 @@ export default function Certifications() {
           maxSubtitleWidth="max-w-3xl"
         />
 
-        {/* Certifications Row / Grid */}
+        {/* Mobile View: Infinite Smooth Marquee Ticker (md:hidden) */}
+        <div className="md:hidden w-full overflow-hidden relative mt-8">
+          {/* Gradient fade edge overlays */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+          <motion.div
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="flex items-center gap-8 w-max"
+          >
+            {/* Duplicated array for seamless 100% infinite marquee loop */}
+            {[...certifications, ...certifications].map((item, idx) => (
+              <div
+                key={`${item.id}-${idx}`}
+                className="flex items-center justify-center p-2 flex-shrink-0"
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="h-14 w-auto object-contain"
+                />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Desktop View: Static Grid Layout (hidden md:flex) */}
         <motion.div
           {...fadeIn}
-          className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 lg:gap-14 mt-8 w-full"
+          className="hidden md:flex flex-wrap items-center justify-center gap-8 sm:gap-12 lg:gap-14 mt-8 w-full"
         >
           {certifications.map((item) => (
             <div

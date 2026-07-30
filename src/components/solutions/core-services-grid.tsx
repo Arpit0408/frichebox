@@ -37,7 +37,7 @@ const servicesData: ServiceCardItem[] = [
     description:
       "We provide a smart WMS platform that offers real-time inventory visibility. Our logistics network covers over 78 cities and 27,000+ pin codes across every zone of India, powered by integrations with over 50 courier platforms and 10+ courier partners.",
     imageSrc: "/images/solutions/smart_wms_delivery.svg",
-    fallbackImage: "/images/about/frichebox_tracking.png",
+    fallbackImage: "/images/about/Frischbox_tracking.png",
     alt: "Frischbox Smart WMS Dashboard & Tracking Monitor",
   },
   {
@@ -47,7 +47,7 @@ const servicesData: ServiceCardItem[] = [
       "We provide seamless reverse logistics and return management. This includes full RTO processing, intake inspection, quality control (QC) checks, and executing restocking or disposal as per your exact brand SOP.",
     imageSrc: "/images/solutions/reverse_logistics.svg",
     fallbackImage: "/images/home/about_warehouse.png",
-    alt: "Frichebox Quality Control & Reverse Logistics Inspection",
+    alt: "Frischbox Quality Control & Reverse Logistics Inspection",
   },
   {
     id: 5,

@@ -56,7 +56,7 @@ export default function Header() {
                     ? "/logo/frichebox.png"
                     : "/logo/frichebox_logo_home.svg"
                 }
-                alt="Frichebox Logo"
+                alt="Frischbox Logo"
                 width={180}
                 height={80}
                 className={cn(

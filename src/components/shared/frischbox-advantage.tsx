@@ -60,7 +60,7 @@ export default function FrischboxAdvantage() {
   } as const;
 
   return (
-    <section className="py-20 sm:py-28 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden">
+    <section className="py-6 sm:py-28 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <motion.div {...fadeIn} className="text-center mb-16 sm:mb-20">

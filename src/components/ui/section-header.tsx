@@ -3,6 +3,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import {
+  fadeInUp,
+  blurReveal,
+  staggerContainer,
+  staggerItem,
+  defaultViewport,
+} from "@/lib/animations";
 
 export interface SectionHeaderProps {
   badge?: string;
@@ -35,13 +42,6 @@ export function SectionHeader({
   maxSubtitleWidth = "max-w-2xl",
   animate = true,
 }: SectionHeaderProps) {
-  const fadeIn = {
-    initial: { opacity: 0, y: 25 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-  } as const;
-
   const getBadgeStyle = () => {
     switch (badgeVariant) {
       case "solid":
@@ -59,46 +59,58 @@ export function SectionHeader({
   if (align === "split") {
     return (
       <Wrapper
-        {...(animate ? fadeIn : {})}
+        {...(animate
+          ? {
+              variants: staggerContainer,
+              initial: "hidden",
+              whileInView: "visible",
+              viewport: defaultViewport,
+            }
+          : {})}
         className={cn(
-          "grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-14 sm:mb-16 w-full",
-          className
+          "grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-12 items-center mb-6 sm:mb-16 w-full",
+          className,
         )}
       >
         <div className="lg:col-span-7 flex flex-col items-start text-left">
           {badge && (
-            <span
+            <motion.span
+              variants={animate ? staggerItem : undefined}
               className={cn(
-                "px-4 py-1.5 text-xs rounded-full font-manrope mb-4 inline-block",
+                "px-4 py-1.5 text-xs rounded-full font-manrope mb-4 inline-block shadow-sm",
                 getBadgeStyle(),
-                badgeClassName
+                badgeClassName,
               )}
             >
               {badge}
-            </span>
+            </motion.span>
           )}
-          <h2
+          <motion.h2
+            variants={animate ? blurReveal : undefined}
             className={cn(
               "text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight font-manrope tracking-tight",
               theme === "dark" ? "text-white" : "text-[#111827]",
-              titleClassName
+              titleClassName,
             )}
           >
             {title}
-          </h2>
+          </motion.h2>
         </div>
 
         {subtitle && (
-          <div className="lg:col-span-5 text-sm sm:text-base font-manrope font-normal leading-relaxed text-left">
+          <motion.div
+            variants={animate ? fadeInUp : undefined}
+            className="lg:col-span-5 text-sm sm:text-base font-manrope font-normal leading-relaxed text-left"
+          >
             <p
               className={cn(
                 theme === "dark" ? "text-neutral-300" : "text-[#4B5563]",
-                subtitleClassName
+                subtitleClassName,
               )}
             >
               {subtitle}
             </p>
-          </div>
+          </motion.div>
         )}
       </Wrapper>
     );
@@ -110,52 +122,62 @@ export function SectionHeader({
 
   return (
     <Wrapper
-      {...(animate ? fadeIn : {})}
+      {...(animate
+        ? {
+            variants: staggerContainer,
+            initial: "hidden",
+            whileInView: "visible",
+            viewport: defaultViewport,
+          }
+        : {})}
       className={cn(
-        "flex flex-col mb-10 md:mb-12",
+        "flex flex-col mb-4 md:mb-12",
         isCenter && "items-center text-center",
         isRight && "items-end text-right",
         align === "left" && "items-start text-left",
-        className
+        className,
       )}
     >
       {/* Badge Pill */}
       {badge && (
-        <span
+        <motion.span
+          variants={animate ? staggerItem : undefined}
           className={cn(
-            "px-4 py-1.5 text-xs rounded-full font-manrope mb-4 inline-block",
+            "px-4 py-1.5 text-xs rounded-full font-manrope mb-4 inline-block shadow-sm",
             getBadgeStyle(),
-            badgeClassName
+            badgeClassName,
           )}
         >
           {badge}
-        </span>
+        </motion.span>
       )}
 
       {/* Main Section Heading */}
-      <h2
+      <motion.h2
+        variants={animate ? blurReveal : undefined}
         className={cn(
           "text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight font-manrope tracking-tight",
           theme === "dark" ? "text-white" : "text-[#111827]",
           maxTitleWidth,
-          titleClassName
+          titleClassName,
         )}
       >
         {title}
-      </h2>
+      </motion.h2>
 
       {/* Subtitle / Description */}
       {subtitle && (
-        <p
+        <motion.p
+          variants={animate ? fadeInUp : undefined}
           className={cn(
             "mt-4 text-sm sm:text-base md:text-lg font-manrope font-normal leading-relaxed",
             theme === "dark" ? "text-neutral-300" : "text-[#4B5563]",
             maxSubtitleWidth,
-            subtitleClassName
+            subtitleClassName,
           )}
         >
           {subtitle}
-        </p>
+        </motion.p>
       )}
     </Wrapper>
   );

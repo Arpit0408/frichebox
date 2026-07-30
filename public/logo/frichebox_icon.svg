@@ -7,7 +7,7 @@
     </mask>
   </defs>
 
-  <!-- Frichebox Isometric Icon (Light/White Mode vector) -->
+  <!-- Frischbox Isometric Icon (Light/White Mode vector) -->
   <g mask="url(#badgeMask)" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
     <!-- Top Face -->
     <path d="M 128 36 L 208 80 L 128 124 L 48 80 Z" fill="none" />

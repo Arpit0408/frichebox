@@ -1,10 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { FaLinkedinIn } from "react-icons/fa";
 import TopFooter from "@/components/layout/top-footer";
-import logoImg from "../../../public/logo/frichebox_logo_home.svg";
 
 export default function Footer() {
   return (
@@ -16,13 +14,10 @@ export default function Footer() {
             {/* Column 1: Logo, Tagline & Social Link */}
             <div className="md:col-span-5 flex flex-col items-start gap-5">
               <Link href="/" className="relative block mb-1">
-                <Image
-                  src={logoImg}
-                  alt="FRICHEBOX Logo"
-                  width={150}
-                  height={45}
+                <img
+                  src="/logo/frichebox_logo_home.svg"
+                  alt="Frichebox Logo"
                   className="h-10 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.15)]"
-                  priority
                 />
               </Link>
 
@@ -39,7 +34,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full border border-white/30 text-white hover:bg-white/10 hover:border-white flex items-center justify-center transition-all cursor-pointer"
-                  aria-label="Follow FRICHEBOX on LinkedIn"
+                  aria-label="Follow Frischbox on LinkedIn"
                 >
                   <FaLinkedinIn className="text-base" />
                 </a>
@@ -117,7 +112,7 @@ export default function Footer() {
           {/* Bottom Copyright Divider */}
           <div className="mt-16 pt-4 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-neutral-500 font-manrope">
             <span>
-              &copy; {new Date().getFullYear()} FRICHEBOX. All rights reserved.
+              &copy; {new Date().getFullYear()} Frischbox. All rights reserved.
             </span>
             <span>Faster Storage. Smarter Supply.</span>
           </div>

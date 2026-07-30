@@ -6,7 +6,7 @@
     </mask>
   </defs>
 
-  <!-- Frichebox Isometric Icon (Dark Mode vector for light backgrounds) -->
+  <!-- Frischbox Isometric Icon (Dark Mode vector for light backgrounds) -->
   <g mask="url(#badgeMaskDark)" stroke="#0F172A" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
     <!-- Top Face -->
     <path d="M 128 36 L 208 80 L 128 124 L 48 80 Z" fill="none" />

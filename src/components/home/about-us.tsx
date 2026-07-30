@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { LuBriefcase, LuCircleCheck, LuBuilding2 } from "react-icons/lu";
 import SectionHeader from "@/components/ui/section-header";
+import Counter from "@/components/ui/counter";
 
 export default function AboutUs() {
   // Animation presets for scroll reveal
@@ -24,7 +25,7 @@ export default function AboutUs() {
   } as const;
 
   return (
-    <section className="py-24 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden">
+    <section className="py-4 sm:py-24 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           align="split"
@@ -32,7 +33,8 @@ export default function AboutUs() {
           badgeVariant="purple"
           title={
             <>
-              Our Journey: Excellence In Health &amp; Wellness <br className="hidden lg:inline" /> Logistics
+              Our Journey: Excellence In Health &amp; Wellness{" "}
+              <br className="hidden lg:inline" /> Logistics
             </>
           }
           subtitle="Frischbox wasn't created just to rent space. We built it after realizing existing Indian warehouses lacked the absolute cleanliness, strict discipline, and advanced tech demanded by global brands. Instead of compromising, we built the solution."
@@ -43,17 +45,19 @@ export default function AboutUs() {
             initial="initial"
             whileInView="whileInView"
             viewport={{ once: true, margin: "-100px" }}
-            className="lg:col-span-3 flex flex-col justify-between bg-neutral-50/50 border border-neutral-100 rounded-2xl p-6 sm:p-8"
+            className="lg:col-span-3 grid grid-cols-2 lg:flex lg:flex-col justify-between bg-neutral-50/50 border border-neutral-100 rounded-2xl p-5 sm:p-8 gap-y-6 gap-x-4 lg:gap-0"
           >
             {/* Stat 1 */}
             <motion.div
               variants={fadeIn}
-              className="flex flex-col py-4 first:pt-0 border-b border-neutral-200/50"
+              className="flex flex-col lg:py-4 lg:border-b lg:border-neutral-200/50"
             >
-              <span className="text-3xl font-extrabold text-[#1A1A1A] font-manrope">
-                5K+
-              </span>
-              <span className="text-sm font-medium text-neutral-500 font-manrope mt-1">
+              <Counter
+                value={5000}
+                suffix="+"
+                className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-manrope"
+              />
+              <span className="text-xs sm:text-sm font-medium text-neutral-500 font-manrope mt-1">
                 Happy Clients Served
               </span>
             </motion.div>
@@ -61,12 +65,13 @@ export default function AboutUs() {
             {/* Stat 2 */}
             <motion.div
               variants={fadeIn}
-              className="flex flex-col py-5 border-b border-neutral-200/50"
+              className="flex flex-col lg:py-5 lg:border-b lg:border-neutral-200/50"
             >
-              <span className="text-3xl font-extrabold text-[#1A1A1A] font-manrope">
-                10,000
-              </span>
-              <span className="text-sm font-medium text-neutral-500 font-manrope mt-1">
+              <Counter
+                value={10000}
+                className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-manrope"
+              />
+              <span className="text-xs sm:text-sm font-medium text-neutral-500 font-manrope mt-1">
                 Sq Ft Facility (Noida)
               </span>
             </motion.div>
@@ -74,12 +79,14 @@ export default function AboutUs() {
             {/* Stat 3 */}
             <motion.div
               variants={fadeIn}
-              className="flex flex-col py-5 border-b border-neutral-200/50"
+              className="flex flex-col lg:py-5 lg:border-b lg:border-neutral-200/50"
             >
-              <span className="text-3xl font-extrabold text-[#1A1A1A] font-manrope">
-                27K+
-              </span>
-              <span className="text-sm font-medium text-neutral-500 font-manrope mt-1">
+              <Counter
+                value={27000}
+                suffix="+"
+                className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-manrope"
+              />
+              <span className="text-xs sm:text-sm font-medium text-neutral-500 font-manrope mt-1">
                 Pin Codes Covered
               </span>
             </motion.div>
@@ -87,12 +94,14 @@ export default function AboutUs() {
             {/* Stat 4 */}
             <motion.div
               variants={fadeIn}
-              className="flex flex-col py-4 last:pb-0"
+              className="flex flex-col lg:py-4"
             >
-              <span className="text-3xl font-extrabold text-[#1A1A1A] font-manrope">
-                78+
-              </span>
-              <span className="text-sm font-medium text-neutral-500 font-manrope mt-1">
+              <Counter
+                value={78}
+                suffix="+"
+                className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-manrope"
+              />
+              <span className="text-xs sm:text-sm font-medium text-neutral-500 font-manrope mt-1">
                 Indian Cities Reached
               </span>
             </motion.div>
@@ -105,7 +114,7 @@ export default function AboutUs() {
           >
             <img
               src="/images/home/about_warehouse.png"
-              alt="Frichebox Automated Warehouse Rack System"
+              alt="Frischbox Automated Warehouse Rack System"
               className="w-full h-full object-cover rounded-3xl min-h-[350px] lg:absolute lg:inset-0 transition-transform duration-700 group-hover:scale-105"
             />
           </motion.div>

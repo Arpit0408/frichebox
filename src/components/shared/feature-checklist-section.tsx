@@ -89,7 +89,7 @@ export default function FeatureChecklistSection({
   return (
     <section
       className={cn(
-        "py-16 sm:py-24 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden relative",
+        "py-4 sm:py-24 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden relative",
         className,
       )}
     >

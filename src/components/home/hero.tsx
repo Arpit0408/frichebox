@@ -43,14 +43,14 @@ export default function Hero() {
             <SwiperSlide className="w-full h-full">
               <img
                 src="/images/home/hero_1.png"
-                alt="Frichebox Warehouse Fulfillment"
+                alt="Frischbox Warehouse Fulfillment"
                 className="w-full h-full object-cover object-center"
               />
             </SwiperSlide>
             <SwiperSlide className="w-full h-full">
               <img
                 src="/images/home/hero_1.png"
-                alt="Frichebox Delivery Logistics"
+                alt="Frischbox Delivery Logistics"
                 className="w-full h-full object-cover object-center"
               />
             </SwiperSlide>
@@ -102,12 +102,14 @@ export default function Hero() {
       </section>
 
       {/* Rotating Circle Badge (Get Quote) Centered on Polygon Bottom V-Vertex */}
-      <div
+      <motion.div
         onClick={scrollToNext}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[15%] sm:translate-y-[36%] z-30 cursor-pointer"
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[15%] sm:translate-y-[36%] z-30 cursor-pointer drop-shadow-[0_0_25px_rgba(91,58,245,0.6)] hover:drop-shadow-[0_0_35px_rgba(91,58,245,0.9)] transition-all duration-300"
       >
         <CircularBadge logoSrc="/logo/frichebox_icon.svg" />
-      </div>
+      </motion.div>
     </div>
   );
 }

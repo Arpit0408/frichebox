@@ -109,7 +109,7 @@ export default function ContactPageContent() {
       {/* ---------------- PART 2: Middle Full-Width Map Banner ---------------- */}
       <div className="w-full relative h-[380px] sm:h-[420px]">
         <iframe
-          title="Frichebox Noida Sector 138 Warehouse Location"
+          title="Frischbox Noida Sector 138 Warehouse Location"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14022.046188448834!2d77.3912168!3d28.5242784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce86f2b545db5%3A0x6b1db98a005ad9d1!2sSector%20138%2C%20Noida%2C%20Uttar%20Pradesh%20201305!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
           className="w-full h-full border-0 shadow-inner"
           allowFullScreen={false}

@@ -1,9 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check } from "@/components/ui/check";
+import { LuCheck } from "react-icons/lu";
 import { AnimateIcon } from "@/components/ui/animate-icon";
 import { SectionHeader } from "@/components/ui/section-header";
+import {
+  fadeInUp,
+  fadeInRight,
+  staggerContainer,
+  staggerItem,
+  defaultViewport,
+} from "@/lib/animations";
 
 export default function WhyChooseUs() {
   // Animation presets
@@ -34,7 +41,7 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="py-24 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden">
+    <section className="py-12 sm:py-24 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Text & Features (col-span-7) */}
@@ -43,7 +50,7 @@ export default function WhyChooseUs() {
               align="left"
               badge="Why Choose Us"
               badgeVariant="subtle"
-              title="Every warehouse says 'We have space.' FRICHEBOX says 'We protect your brand.'"
+              title="Every warehouse says 'We have space.' Frischbox says 'We protect your brand.'"
               subtitle="We don't just store your inventory—we act as an extension of your supply chain. By combining specialized, climate-monitored infrastructure with an automated technology stack, we eliminate errors and help your brand stay one step ahead."
               maxTitleWidth="max-w-2xl"
               maxSubtitleWidth="max-w-xl"
@@ -54,7 +61,7 @@ export default function WhyChooseUs() {
               initial="initial"
               whileInView="whileInView"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full pt-4 sm:pt-0"
             >
               {checklistItems.map((item) => (
                 <motion.div
@@ -68,7 +75,7 @@ export default function WhyChooseUs() {
                     animateOnHover
                     className="flex-shrink-0 w-5 h-5 rounded-md bg-indigo-50 text-[#482BE0]"
                   >
-                    <Check className="w-3.5 h-3.5 text-[#482BE0]" />
+                    <LuCheck className="w-3.5 h-3.5 stroke-[3] text-[#482BE0]" />
                   </AnimateIcon>
                   {/* Label */}
                   <span className="text-sm sm:text-base font-semibold text-neutral-800 font-manrope group-hover:text-[#482BE0] transition-colors duration-200">
@@ -86,7 +93,7 @@ export default function WhyChooseUs() {
           >
             <img
               src="/images/home/why_choose_us.png"
-              alt="Frichebox Warehouse Operator smiling"
+              alt="Frischbox Warehouse Operator smiling"
               className="w-full h-full object-cover rounded-3xl transition-transform duration-700 group-hover:scale-105"
             />
           </motion.div>

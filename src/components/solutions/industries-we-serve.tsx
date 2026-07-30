@@ -43,7 +43,7 @@ const industries: IndustryItem[] = [
 ];
 
 export default function IndustriesWeServe() {
-  const [activeId, setActiveId] = useState<number>(1);
+  const [activeId, setActiveId] = useState<number>(0);
 
   const fadeIn = {
     initial: { opacity: 0, y: 30 },
@@ -63,7 +63,7 @@ export default function IndustriesWeServe() {
           >
             <img
               src="/images/solutions/solutions_story.png"
-              alt="Frichebox Industries We Serve Fulfillment Operations"
+              alt="Frischbox Industries We Serve Fulfillment Operations"
               className="w-full h-full object-contain"
               onError={(e) => {
                 (e.target as HTMLImageElement).src =

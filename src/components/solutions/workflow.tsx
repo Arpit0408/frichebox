@@ -165,6 +165,19 @@ export default function Workflow() {
                 className="absolute top-1/2 -translate-y-1/2 left-[10%] h-[2px] bg-gradient-to-r from-[#5B3AF5] via-[#AC9CFF] to-[#5B3AF5] shadow-[0_0_12px_#5B3AF5] pointer-events-none z-0"
               />
 
+              {/* Glowing Pulse Beam Moving Animation */}
+              <motion.div
+                animate={{
+                  left: ["10%", "85%", "10%"],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute top-1/2 -translate-y-1/2 w-16 h-[3px] bg-gradient-to-r from-transparent via-[#AC9CFF] to-transparent shadow-[0_0_20px_#AC9CFF] pointer-events-none z-0"
+              />
+
               {/* 5 Dot Nodes Grid */}
               <div className="grid grid-cols-5 gap-4 w-full relative z-10">
                 {stepsData.map((step) => {
