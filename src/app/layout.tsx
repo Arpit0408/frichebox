@@ -4,7 +4,6 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import LenisProvider from "@/components/providers/lenis-provider";
 import ScrollProgress from "@/components/ui/scroll-progress";
-import CustomCursor from "@/components/ui/custom-cursor";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -45,7 +44,6 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-[#060814] text-white font-sans">
         <LenisProvider>
-          <CustomCursor />
           <ScrollProgress />
           {/* Premium radial gradient glow backdrop */}
           <div className="fixed inset-0 z-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-950/40 via-[#060814] to-[#04050d] pointer-events-none" />
