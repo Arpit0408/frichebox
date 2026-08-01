@@ -1,8 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Check } from "@/components/ui/check";
-import { AnimateIcon } from "@/components/ui/animate-icon";
+import { motion, Variants } from "framer-motion";
+import { LuCheck } from "react-icons/lu";
 import { SectionHeader } from "@/components/ui/section-header";
 
 interface ServiceItem {
@@ -51,38 +50,35 @@ const services: ServiceItem[] = [
 ];
 
 export default function Services() {
-  // Scroll reveal presets
-  const fadeIn = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-  } as const;
-
-  const cardVariants = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    hover: {
-      y: -5,
-      transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
-    },
-  } as const;
-
-  const staggerContainer = {
-    initial: {},
-    whileInView: {
+  const staggerContainer: Variants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
       },
     },
-    viewport: { once: true, margin: "-100px" },
-  } as const;
+  };
+
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 35, filter: "blur(4px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.7,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
 
   return (
-    <section className="py-24 px-6 sm:px-8 lg:px-12 bg-[#050312] text-white overflow-hidden relative border-t border-white/[0.02] border-b border-white/[0.02]">
-      {/* Decorative subtle background glows */}
-      <div className="absolute top-[20%] left-[-10%] w-[350px] h-[350px] rounded-full bg-[#482BE0]/10 blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[-10%] w-[350px] h-[350px] rounded-full bg-[#482BE0]/5 blur-[120px] pointer-events-none" />
+    <section className="py-20 sm:py-28 px-6 sm:px-8 lg:px-12 bg-[#050312] text-white overflow-hidden relative border-t border-white/[0.04] border-b border-white/[0.04]">
+      {/* Decorative ambient background glows */}
+      <div className="absolute top-[20%] left-[-10%] w-[450px] h-[450px] rounded-full bg-[#482BE0]/15 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[10%] right-[-10%] w-[450px] h-[450px] rounded-full bg-[#5B3AF5]/10 blur-[130px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center">
         <SectionHeader
@@ -91,34 +87,37 @@ export default function Services() {
           badgeVariant="solid"
           title="Your Trusted Partner for Stress-Free Fulfillment"
           align="center"
-          maxTitleWidth="max-w-xl"
-          className="mb-8"
+          maxTitleWidth="max-w-2xl"
+          className="mb-6"
         />
+
+        {/* 6 Services Grid */}
         <motion.div
           variants={staggerContainer}
-          initial="initial"
-          whileInView="whileInView"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 mt-16 w-full"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-12 w-full"
         >
           {services.map((service) => (
             <motion.div
               key={service.id}
               variants={cardVariants}
-              whileHover="hover"
-              className="flex items-start gap-4 sm:gap-5 group cursor-pointer"
+              whileHover={{ y: -6, scale: 1.01 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="flex items-start gap-4 sm:gap-5 group cursor-pointer text-white p-6 rounded-2xl transition-all duration-300 "
             >
-              {/* Checkbox Icon Wrapper (56px x 56px, rounded-xl) */}
-              <AnimateIcon className="flex-shrink-0 w-14 h-14 rounded-xl bg-[#482BE0] flex items-center justify-center shadow-lg shadow-[#482BE0]/15 group-hover:bg-[#381ec8] transition-colors duration-300">
-                <Check className="w-5 h-5 text-white" />
-              </AnimateIcon>
+              {/* Checkbox Icon Wrapper */}
+              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#5B3AF5] flex items-center justify-center shadow-lg shadow-[#5B3AF5]/30 group-hover:scale-110 group-hover:bg-[#482BE0] transition-all duration-300">
+                <LuCheck className="w-5 h-5 text-white stroke-[3]" />
+              </div>
 
               {/* Title & Description */}
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-white font-manrope leading-snug group-hover:text-[#482BE0] transition-colors duration-200">
+                <h3 className="text-lg sm:text-xl font-bold text-white font-manrope leading-snug transition-colors duration-200 group-hover:text-[#C7B8FF]">
                   {service.title}
                 </h3>
-                <p className="text-sm text-[#DADADA] font-manrope font-normal mt-3 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#B0B0B0] font-manrope font-normal mt-2.5 leading-relaxed group-hover:text-[#D4D4D4] transition-colors duration-200">
                   {service.description}
                 </p>
               </div>

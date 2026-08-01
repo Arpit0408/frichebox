@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { LuWarehouse, LuTruck, LuDatabase, LuUserCheck } from "react-icons/lu";
+import SectionHeader from "@/components/ui/section-header";
 
 export interface StrengthCard {
   id: number;
@@ -45,75 +46,69 @@ const defaultStrengths: StrengthCard[] = [
 ];
 
 export default function KeyStrengths() {
-  const fadeIn = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-  } as const;
-
-  const staggerContainer = {
-    initial: {},
-    whileInView: {
+  const containerVariants: Variants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
       },
     },
-    viewport: { once: true, margin: "-100px" },
-  } as const;
+  };
+
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 35, filter: "blur(3px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
 
   return (
     <section className="py-20 sm:py-24 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden relative">
       <div className="max-w-7xl mx-auto">
-        {/* Top Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-14">
-          <motion.div
-            {...fadeIn}
-            className="lg:col-span-7 flex flex-col items-start"
-          >
-            <span className="px-4 py-1.5 text-xs font-semibold text-[#5B3AF5] bg-[#F0EBFF] rounded-full font-manrope capitalize tracking-wider mb-4 inline-block">
-              Key Strengths
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#111827] font-manrope tracking-tight leading-tight">
+        {/* Top Header via SectionHeader */}
+        <SectionHeader
+          align="split"
+          badge="Key Strengths"
+          badgeVariant="purple"
+          title={
+            <>
               The infrastructure <br className="hidden sm:inline" />
               behind your growth.
-            </h2>
-          </motion.div>
-
-          <motion.div
-            {...fadeIn}
-            className="lg:col-span-5 text-sm sm:text-base text-[#4B5563] font-manrope font-normal leading-relaxed"
-          >
-            We combine smart warehouse automation, flexible storage space, and a
-            robust pan-India logistics network designed to scale effortlessly
-            alongside your business from startup to enterprise.
-          </motion.div>
-        </div>
+            </>
+          }
+          titleSize="text-3xl sm:text-4xl lg:text-5xl"
+          subtitle="We combine smart warehouse automation, flexible storage space, and a robust pan-India logistics network designed to scale effortlessly alongside your business from startup to enterprise."
+        />
 
         {/* 4 Strength Cards Grid */}
         <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="whileInView"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch"
+          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch mt-12"
         >
           {defaultStrengths.map((item) => {
             const IconComponent = item.icon;
             return (
               <motion.div
                 key={item.id}
-                variants={fadeIn}
+                variants={cardVariants}
                 className="group relative bg-white hover:bg-[#482BE0] p-4 sm:p-6 md:p-8 sm:p-9 shadow-lg hover:shadow-2xl border-b-4 border-[#482BE0] hover:border-[#482BE0] transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-start overflow-hidden cursor-pointer min-h-[220px] sm:min-h-[440px]"
               >
                 {/* Background Watermark Graphic in Top Right */}
-                <div className="hidden sm:block absolute right-[-10%] top-[-5%] text-[#482BE0]/[0.07] group-hover:text-white/[0.08] select-none pointer-events-none transition-colors duration-300">
+                <div className="hidden sm:block absolute right-[-10%] top-[-5%] text-[#482BE0]/[0.07] group-hover:text-white/[0.08] select-none pointer-events-none transition-all duration-300 group-hover:rotate-12 group-hover:scale-110">
                   <IconComponent className="sm:w-36 sm:h-36 stroke-[1.2]" />
                 </div>
 
                 <div className="relative z-10 flex flex-col items-start w-full">
                   {/* Top Icon */}
-                  <div className="mb-12 text-[#482BE0] group-hover:text-white transition-colors duration-300">
+                  <div className="mb-12 text-[#482BE0] group-hover:text-white transition-colors duration-300 group-hover:scale-110 transform transition-transform">
                     <IconComponent className="w-10 h-10 sm:w-16 sm:h-16 stroke-[1.5]" />
                   </div>
 

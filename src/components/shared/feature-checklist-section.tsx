@@ -172,7 +172,7 @@ export default function FeatureChecklistSection({
           <motion.div
             {...fadeIn}
             className={cn(
-              "lg:col-span-6 lg:sticky lg:top-28 relative w-full aspect-[4/3] sm:aspect-[14/11] overflow-hidden rounded-3xl sm:rounded-[32px] shadow-2xl group border border-neutral-100 self-start",
+              "lg:col-span-6 lg:sticky lg:top-28 relative w-full aspect-[4/3] sm:aspect-[14/11] overflow-hidden rounded-3xl sm:rounded-[32px] group border border-neutral-100 self-start",
               !isImageRight && "lg:order-1",
             )}
           >

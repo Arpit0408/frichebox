@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { LuPlus, LuMinus } from "react-icons/lu";
 
 export interface FaqItem {
@@ -75,12 +75,35 @@ export default function FaqSection({
     setOpenId(openId === id ? null : id);
   };
 
-  const fadeIn = {
-    initial: { opacity: 0, y: 25 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-80px" },
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-  } as const;
+  const fadeIn: Variants = {
+    hidden: { opacity: 0, y: 25 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
+  const faqContainer: Variants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const faqItemVariants: Variants = {
+    hidden: { opacity: 0, y: 25, filter: "blur(3px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
 
   return (
     <section
@@ -89,7 +112,10 @@ export default function FaqSection({
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Header */}
         <motion.div
-          {...fadeIn}
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
           className="flex flex-col items-start mb-12 relative z-10"
         >
           {badge && (
@@ -102,29 +128,48 @@ export default function FaqSection({
           </h2>
         </motion.div>
 
-        {/* FAQ Accordion List */}
+        {/* FAQ Accordion List with Sequential Stagger */}
         <motion.div
-          {...fadeIn}
+          variants={faqContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
           className="divide-y divide-neutral-200 border-t border-b border-neutral-200 relative z-10"
         >
           {items.map((item) => {
             const isOpen = openId === item.id;
             return (
-              <div key={item.id} className="py-5 sm:py-6 transition-colors">
+              <motion.div
+                key={item.id}
+                variants={faqItemVariants}
+                className="py-5 sm:py-6 transition-colors"
+              >
                 <button
                   type="button"
                   onClick={() => toggleFaq(item.id)}
                   className="w-full flex items-center justify-between text-left gap-4 group cursor-pointer focus:outline-none"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-base sm:text-lg lg:text-xl font-bold font-manrope text-[#111827] group-hover:text-[#482BE0] transition-colors leading-snug">
+                  <span
+                    className={`text-base sm:text-lg lg:text-xl font-bold font-manrope transition-colors leading-snug ${
+                      isOpen
+                        ? "text-[#5B3AF5]"
+                        : "text-[#111827] group-hover:text-[#5B3AF5]"
+                    }`}
+                  >
                     {item.question}
                   </span>
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center text-neutral-800 group-hover:text-[#482BE0] group-hover:bg-indigo-50 transition-colors flex-shrink-0">
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0 ${
+                      isOpen
+                        ? "bg-[#5B3AF5] text-white rotate-180 shadow-md shadow-[#5B3AF5]/30"
+                        : "bg-neutral-100 text-neutral-800 group-hover:bg-[#F0EBFF] group-hover:text-[#5B3AF5]"
+                    }`}
+                  >
                     {isOpen ? (
-                      <LuMinus className="w-5 h-5" />
+                      <LuMinus className="w-4 h-4 stroke-[3]" />
                     ) : (
-                      <LuPlus className="w-5 h-5" />
+                      <LuPlus className="w-4 h-4 stroke-[3]" />
                     )}
                   </div>
                 </button>
@@ -138,13 +183,13 @@ export default function FaqSection({
                       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <p className="pt-3 pb-1 text-sm sm:text-base text-[#4B5563] font-manrope leading-relaxed max-w-3xl">
+                      <p className="pt-3.5 pb-1 text-sm sm:text-base text-[#4B5563] font-manrope leading-relaxed max-w-3xl">
                         {item.answer}
                       </p>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             );
           })}
         </motion.div>

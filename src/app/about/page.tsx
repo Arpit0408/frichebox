@@ -38,7 +38,7 @@ export default function AboutPage() {
               "Near enough isn't enough. We enforce a strict zero-pick-error SOP using automated workflows to protect your brand's reputation.",
           },
         ]}
-        imageSrc="/images/about/Frischbox_tracking.png"
+        imageSrc="/images/about/frichebox_tracking.png"
         imageAlt="Frischbox Live Tracking Dashboard on computer screen"
         imagePosition="right"
       />

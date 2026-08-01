@@ -1,49 +1,53 @@
 import { Variants } from "framer-motion";
 
 /**
- * Reusable Framer Motion Variants & Animation Presets for Frischbox Website
+ * Centralized Animation Configuration Library for Frischbox Website
+ * Controls all heading, subtitle, text, badge, and card animation timings.
  */
 
-// 1. Smooth Fade Up (Headings, Subtitles, Paragraphs)
+// 1. Smooth Fade Up (Headings, Subtitles, Paragraphs) - Slightly Slower (0.95s)
 export const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 35, filter: "blur(3px)" },
   visible: {
     opacity: 1,
     y: 0,
+    filter: "blur(0px)",
     transition: {
-      duration: 0.7,
+      duration: 0.95,
       ease: [0.16, 1, 0.3, 1],
     },
   },
 };
 
-// 2. Fade In Left (Badges, Left Columns)
+// 2. Fade In Left (Badges, Left Columns) - Slightly Slower (0.95s)
 export const fadeInLeft: Variants = {
-  hidden: { opacity: 0, x: -40 },
+  hidden: { opacity: 0, x: -40, filter: "blur(3px)" },
   visible: {
     opacity: 1,
     x: 0,
+    filter: "blur(0px)",
     transition: {
-      duration: 0.7,
+      duration: 0.95,
       ease: [0.16, 1, 0.3, 1],
     },
   },
 };
 
-// 3. Fade In Right (Right Column Visuals, Bento Cards)
+// 3. Fade In Right (Right Column Visuals, Bento Cards) - Slightly Slower (0.95s)
 export const fadeInRight: Variants = {
-  hidden: { opacity: 0, x: 40 },
+  hidden: { opacity: 0, x: 40, filter: "blur(3px)" },
   visible: {
     opacity: 1,
     x: 0,
+    filter: "blur(0px)",
     transition: {
-      duration: 0.7,
+      duration: 0.95,
       ease: [0.16, 1, 0.3, 1],
     },
   },
 };
 
-// 4. Scale Up & Spring Reveal (Cards, Floating Stats, Badges)
+// 4. Scale Up & Spring Reveal (Cards, Floating Stats, Badges) - Slower (0.85s)
 export const scaleUp: Variants = {
   hidden: { opacity: 0, scale: 0.92, y: 20 },
   visible: {
@@ -51,38 +55,39 @@ export const scaleUp: Variants = {
     scale: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.85,
       ease: [0.16, 1, 0.3, 1],
     },
   },
 };
 
-// 5. Stagger Container (Grids, Features List, Tab Lists)
+// 5. Stagger Container (Grids, Features List, Tab Lists) - Slightly Slower Stagger (0.16s)
 export const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
+      staggerChildren: 0.16,
       delayChildren: 0.1,
     },
   },
 };
 
-// 6. Stagger Item (Child element inside a stagger container)
+// 6. Stagger Item (Child element inside a stagger container) - Slower (0.75s)
 export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 28, filter: "blur(3px)" },
   visible: {
     opacity: 1,
     y: 0,
+    filter: "blur(0px)",
     transition: {
-      duration: 0.5,
+      duration: 0.75,
       ease: [0.16, 1, 0.3, 1],
     },
   },
 };
 
-// 7. Text Blur Reveal (Premium Headings & Badges)
+// 7. Text Blur Reveal (Premium Headings & Badges) - Slower (1.05s)
 export const blurReveal: Variants = {
   hidden: { opacity: 0, filter: "blur(10px)", y: 15 },
   visible: {
@@ -90,7 +95,7 @@ export const blurReveal: Variants = {
     filter: "blur(0px)",
     y: 0,
     transition: {
-      duration: 0.8,
+      duration: 1.05,
       ease: [0.16, 1, 0.3, 1],
     },
   },
@@ -100,7 +105,7 @@ export const blurReveal: Variants = {
 export const hoverCardProps = {
   whileHover: {
     y: -6,
-    transition: { duration: 0.3, ease: "easeOut" },
+    transition: { duration: 0.35, ease: "easeOut" },
   },
   whileTap: {
     scale: 0.98,
@@ -118,7 +123,7 @@ export const pulseBadgeProps = {
     ],
   },
   transition: {
-    duration: 3,
+    duration: 3.5,
     repeat: Infinity,
     ease: "easeInOut",
   },

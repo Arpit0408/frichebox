@@ -1,8 +1,9 @@
 "use client";
 
+import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import CircularBadge from "@/components/ui/circular-badge";
 
 // Import Swiper styles
@@ -10,6 +11,25 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 
 export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const smoothScroll = useSpring(scrollYProgress, {
+    damping: 25,
+    stiffness: 120,
+    mass: 0.2,
+  });
+
+  const bgY = useTransform(smoothScroll, [0, 1], ["-5%", "35%"]);
+  const bgScale = useTransform(smoothScroll, [0, 1], [1.08, 1.25]);
+
+  const textY = useTransform(smoothScroll, [0, 1], ["0%", "-35%"]);
+  const textOpacity = useTransform(smoothScroll, [0, 0.75], [1, 0.1]);
+
   const scrollToNext = () => {
     window.scrollTo({
       top: window.innerHeight * 0.8,
@@ -18,16 +38,20 @@ export default function Hero() {
   };
 
   return (
-    <div className="relative w-full h-[60vh] sm:h-[85vh] lg:h-[92vh] min-h-[480px] mb-14 sm:mb-20">
-      {/* Clipped Section */}
+    <div
+      ref={containerRef}
+      className="relative w-full h-[60vh] sm:h-[85vh] lg:h-[92vh] min-h-[480px] mb-14 sm:mb-20 overflow-visible z-20"
+    >
       <section
         className="relative w-full h-full overflow-hidden flex items-center justify-start bg-neutral-950"
         style={{
           clipPath: "polygon(0 0, 100% 0, 100% 84%, 50% 100%, 0 84%)",
         }}
       >
-        {/* Background Auto-play Swiper Slider */}
-        <div className="absolute inset-0 z-0">
+        <motion.div
+          style={{ y: bgY, scale: bgScale }}
+          className="absolute -top-[20%] -bottom-[20%] inset-x-0 z-0 origin-center"
+        >
           <Swiper
             modules={[Autoplay, EffectFade]}
             effect="fade"
@@ -55,9 +79,8 @@ export default function Hero() {
               />
             </SwiperSlide>
           </Swiper>
-        </div>
+        </motion.div>
 
-        {/* Blue Radial/Linear Gradient Overlay */}
         <div
           className="absolute inset-0 z-10 pointer-events-none"
           style={{
@@ -66,8 +89,11 @@ export default function Hero() {
           }}
         />
 
-        {/* Content Container */}
-        <div className="relative z-20 w-full max-w-7xl mx-auto flex flex-col items-start px-6 pb-10 sm:pb-16">
+        {/* Layer B: Multi-layer Parallax Text Content Container */}
+        <motion.div
+          style={{ y: textY, opacity: textOpacity }}
+          className="relative z-20 w-full max-w-7xl mx-auto flex flex-col items-start px-6 pb-10 sm:pb-16"
+        >
           <div className="max-w-xl text-left">
             {/* Main Heading */}
             <motion.h1
@@ -98,15 +124,14 @@ export default function Hero() {
               hassle-free pan-India delivery built for your growth.
             </motion.p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* Rotating Circle Badge (Get Quote) Centered on Polygon Bottom V-Vertex */}
       <motion.div
         onClick={scrollToNext}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[15%] sm:translate-y-[36%] z-30 cursor-pointer drop-shadow-[0_0_25px_rgba(91,58,245,0.6)] hover:drop-shadow-[0_0_35px_rgba(91,58,245,0.9)] transition-all duration-300"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[15%] sm:translate-y-[36%] z-50 cursor-pointer drop-shadow-[0_0_25px_rgba(91,58,245,0.6)] hover:drop-shadow-[0_0_35px_rgba(91,58,245,0.9)] transition-all duration-300"
       >
         <CircularBadge logoSrc="/logo/frichebox_icon.svg" />
       </motion.div>

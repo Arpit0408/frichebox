@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
+import { LuPlus, LuMinus } from "react-icons/lu";
+import SectionHeader from "@/components/ui/section-header";
 
 interface IndustryItem {
   id: number;
@@ -43,23 +45,49 @@ const industries: IndustryItem[] = [
 ];
 
 export default function IndustriesWeServe() {
-  const [activeId, setActiveId] = useState<number>(0);
+  const [activeId, setActiveId] = useState<number>(1);
 
-  const fadeIn = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-  } as const;
+  const fadeIn: Variants = {
+    hidden: { opacity: 0, y: 30, filter: "blur(3px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
 
   return (
     <section className="py-20 sm:py-28 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden relative">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* ---------------- Left Column: Single Photo Card ---------------- */}
+          {/* Left Column: Photo Card */}
           <motion.div
-            {...fadeIn}
-            className="lg:col-span-6 relative w-full h-[380px] sm:h-[480px] lg:h-[620px] "
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="lg:col-span-6 relative w-full h-[380px] sm:h-[480px] lg:h-[620px]"
           >
             <img
               src="/images/solutions/solutions_story.png"
@@ -72,43 +100,36 @@ export default function IndustriesWeServe() {
             />
           </motion.div>
 
-          {/* ---------------- Right Column: Header & Accordion Pills ---------------- */}
+          {/* Right Column: Header & Accordion Pills */}
           <div className="lg:col-span-6 flex flex-col justify-center">
-            {/* Badge */}
-            <motion.div {...fadeIn} className="mb-4">
-              <span className="px-4 py-1.5 text-xs font-semibold text-[#5B3AF5] bg-[#F0EBFF] rounded-full font-manrope capitalize tracking-wider inline-block">
-                About Us
-              </span>
-            </motion.div>
-
-            {/* Heading */}
-            <motion.h2
-              {...fadeIn}
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#111827] font-manrope tracking-tight leading-tight mb-4"
-            >
-              Industries We Serve
-            </motion.h2>
-
-            {/* Description */}
-            <motion.p
-              {...fadeIn}
-              className="text-sm sm:text-base text-[#4B5563] font-manrope leading-relaxed mb-8 max-w-xl"
-            >
-              We provide specialised storage, fulfilment, and logistics
-              management designed specifically for brands that require
-              compliant, temperature-sensitive environments. Our fully certified
-              infrastructure ensures your products maintain their integrity from
-              our warehouse to your customer&apos;s door.
-            </motion.p>
+            <SectionHeader
+              align="left"
+              badge="Industries"
+              badgeVariant="purple"
+              title="Industries We Serve"
+              titleSize="text-3xl sm:text-4xl lg:text-5xl"
+              subtitle="We provide specialised storage, fulfilment, and logistics management designed specifically for brands that require compliant, temperature-sensitive environments. Our fully certified infrastructure ensures your products maintain their integrity from our warehouse to your customer's door."
+              maxTitleWidth="max-w-full"
+              maxSubtitleWidth="max-w-xl"
+              animate={false}
+              className="mb-6 md:mb-6"
+            />
 
             {/* 5 Industry Pill Accordions */}
-            <div className="flex flex-col gap-3.5 w-full">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              className="flex flex-col gap-3.5 w-full"
+            >
               {industries.map((item) => {
                 const isOpen = activeId === item.id;
                 return (
                   <motion.div
                     key={item.id}
                     layout
+                    variants={itemVariants}
                     onClick={() => setActiveId(isOpen ? 0 : item.id)}
                     className={`transition-all duration-300 rounded-[20px] cursor-pointer select-none overflow-hidden ${
                       isOpen
@@ -119,14 +140,24 @@ export default function IndustriesWeServe() {
                     {/* Header Pill Title */}
                     <motion.div
                       layout="position"
-                      className="flex items-center justify-between"
+                      className="flex items-center justify-between gap-4"
                     >
                       <h3 className="font-manrope font-bold text-base sm:text-lg tracking-tight">
                         {item.title}
                       </h3>
-                      <span className="text-lg font-bold ml-2">
-                        {isOpen ? "−" : "+"}
-                      </span>
+                      <div
+                        className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0 ${
+                          isOpen
+                            ? "bg-white text-[#482BE0] rotate-180"
+                            : "bg-white/70 text-neutral-800"
+                        }`}
+                      >
+                        {isOpen ? (
+                          <LuMinus className="w-3.5 h-3.5 stroke-[3]" />
+                        ) : (
+                          <LuPlus className="w-3.5 h-3.5 stroke-[3]" />
+                        )}
+                      </div>
                     </motion.div>
 
                     {/* Content Details */}
@@ -149,7 +180,7 @@ export default function IndustriesWeServe() {
                   </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

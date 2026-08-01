@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 
@@ -9,6 +10,9 @@ export default function LenisProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const lenisRef = useRef<Lenis | null>(null);
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -20,6 +24,8 @@ export default function LenisProvider({
       touchMultiplier: 1.5,
     });
 
+    lenisRef.current = lenis;
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -29,8 +35,17 @@ export default function LenisProvider({
 
     return () => {
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
+
+  // Reset scroll position to top (0, 0) whenever page route changes (e.g. clicking footer links)
+  useEffect(() => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return <>{children}</>;
 }

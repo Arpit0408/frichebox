@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { LuBriefcase, LuCircleCheck, LuBuilding2 } from "react-icons/lu";
 import SectionHeader from "@/components/ui/section-header";
 import Counter from "@/components/ui/counter";
@@ -14,15 +14,30 @@ export default function AboutUs() {
     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
   } as const;
 
-  const staggerContainer = {
-    initial: {},
-    whileInView: {
+  // Stagger container for 1-by-1 sequential feature fade up
+  const featureStaggerContainer: Variants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.45,
+        delayChildren: 0.2,
       },
     },
-    viewport: { once: true, margin: "-100px" },
-  } as const;
+  };
+
+  const featureItemFadeUp: Variants = {
+    hidden: { opacity: 0, y: 45, filter: "blur(4px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.85,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
 
   return (
     <section className="py-4 sm:py-24 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden">
@@ -41,21 +56,21 @@ export default function AboutUs() {
         />
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="whileInView"
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
+            variants={featureStaggerContainer}
             className="lg:col-span-3 grid grid-cols-2 lg:flex lg:flex-col justify-between bg-neutral-50/50 border border-neutral-100 rounded-2xl p-5 sm:p-8 gap-y-6 gap-x-4 lg:gap-0"
           >
             {/* Stat 1 */}
             <motion.div
-              variants={fadeIn}
-              className="flex flex-col lg:py-4 lg:border-b lg:border-neutral-200/50"
+              variants={featureItemFadeUp}
+              className="flex flex-col lg:py-4 lg:border-b lg:border-neutral-200/50 group cursor-pointer"
             >
               <Counter
                 value={5000}
                 suffix="+"
-                className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-manrope"
+                className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] group-hover:text-[#5B3AF5] font-manrope transition-colors duration-300"
               />
               <span className="text-xs sm:text-sm font-medium text-neutral-500 font-manrope mt-1">
                 Happy Clients Served
@@ -64,12 +79,12 @@ export default function AboutUs() {
 
             {/* Stat 2 */}
             <motion.div
-              variants={fadeIn}
-              className="flex flex-col lg:py-5 lg:border-b lg:border-neutral-200/50"
+              variants={featureItemFadeUp}
+              className="flex flex-col lg:py-5 lg:border-b lg:border-neutral-200/50 group cursor-pointer"
             >
               <Counter
                 value={10000}
-                className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-manrope"
+                className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] group-hover:text-[#5B3AF5] font-manrope transition-colors duration-300"
               />
               <span className="text-xs sm:text-sm font-medium text-neutral-500 font-manrope mt-1">
                 Sq Ft Facility (Noida)
@@ -78,13 +93,13 @@ export default function AboutUs() {
 
             {/* Stat 3 */}
             <motion.div
-              variants={fadeIn}
-              className="flex flex-col lg:py-5 lg:border-b lg:border-neutral-200/50"
+              variants={featureItemFadeUp}
+              className="flex flex-col lg:py-5 lg:border-b lg:border-neutral-200/50 group cursor-pointer"
             >
               <Counter
                 value={27000}
                 suffix="+"
-                className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-manrope"
+                className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] group-hover:text-[#5B3AF5] font-manrope transition-colors duration-300"
               />
               <span className="text-xs sm:text-sm font-medium text-neutral-500 font-manrope mt-1">
                 Pin Codes Covered
@@ -93,13 +108,13 @@ export default function AboutUs() {
 
             {/* Stat 4 */}
             <motion.div
-              variants={fadeIn}
-              className="flex flex-col lg:py-4"
+              variants={featureItemFadeUp}
+              className="flex flex-col lg:py-4 group cursor-pointer"
             >
               <Counter
                 value={78}
                 suffix="+"
-                className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-manrope"
+                className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] group-hover:text-[#5B3AF5] font-manrope transition-colors duration-300"
               />
               <span className="text-xs sm:text-sm font-medium text-neutral-500 font-manrope mt-1">
                 Indian Cities Reached
@@ -119,24 +134,24 @@ export default function AboutUs() {
             />
           </motion.div>
 
-          {/* Column 3: Features List Card (col-span-5) */}
+          {/* Column 3: Features List Card (col-span-5) - Staggered Fade Up 1-by-1 */}
           <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="whileInView"
-            viewport={{ once: true, margin: "-100px" }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={featureStaggerContainer}
             className="lg:col-span-5 flex flex-col justify-center gap-8 lg:pl-4"
           >
             {/* Feature 1 */}
             <motion.div
-              variants={fadeIn}
-              className="flex items-start gap-4 sm:gap-5"
+              variants={featureItemFadeUp}
+              className="flex items-start gap-4 sm:gap-5 group cursor-pointer"
             >
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#EDE9FE] text-[#5B3AF5] flex items-center justify-center shadow-sm">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#EDE9FE] text-[#5B3AF5] group-hover:bg-[#5B3AF5] group-hover:text-white group-hover:scale-110 flex items-center justify-center shadow-sm transition-all duration-300">
                 <LuBriefcase className="w-5 h-5 stroke-[2.2]" />
               </div>
               <div className="flex-1">
-                <h3 className="text-lg font-extrabold text-[#1A1A1A] font-manrope leading-snug">
+                <h3 className="text-lg font-extrabold text-[#1A1A1A] group-hover:text-[#5B3AF5] font-manrope leading-snug transition-colors duration-200">
                   Experts In Automated 3PL Management
                 </h3>
                 <p className="text-sm text-[#4A4A4A] font-manrope font-normal mt-2 leading-relaxed">
@@ -148,14 +163,14 @@ export default function AboutUs() {
 
             {/* Feature 2 */}
             <motion.div
-              variants={fadeIn}
-              className="flex items-start gap-4 sm:gap-5"
+              variants={featureItemFadeUp}
+              className="flex items-start gap-4 sm:gap-5 group cursor-pointer"
             >
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#EDE9FE] text-[#5B3AF5] flex items-center justify-center shadow-sm">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#EDE9FE] text-[#5B3AF5] group-hover:bg-[#5B3AF5] group-hover:text-white group-hover:scale-110 flex items-center justify-center shadow-sm transition-all duration-300">
                 <LuCircleCheck className="w-5 h-5 stroke-[2.2]" />
               </div>
               <div className="flex-1">
-                <h3 className="text-lg font-extrabold text-[#1A1A1A] font-manrope leading-snug">
+                <h3 className="text-lg font-extrabold text-[#1A1A1A] group-hover:text-[#5B3AF5] font-manrope leading-snug transition-colors duration-200">
                   Fully Compliant &amp; Certified Storage
                 </h3>
                 <p className="text-sm text-[#4A4A4A] font-manrope font-normal mt-2 leading-relaxed">
@@ -167,14 +182,14 @@ export default function AboutUs() {
 
             {/* Feature 3 */}
             <motion.div
-              variants={fadeIn}
-              className="flex items-start gap-4 sm:gap-5"
+              variants={featureItemFadeUp}
+              className="flex items-start gap-4 sm:gap-5 group cursor-pointer"
             >
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#EDE9FE] text-[#5B3AF5] flex items-center justify-center shadow-sm">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#EDE9FE] text-[#5B3AF5] group-hover:bg-[#5B3AF5] group-hover:text-white group-hover:scale-110 flex items-center justify-center shadow-sm transition-all duration-300">
                 <LuBuilding2 className="w-5 h-5 stroke-[2.2]" />
               </div>
               <div className="flex-1">
-                <h3 className="text-lg font-extrabold text-[#1A1A1A] font-manrope leading-snug">
+                <h3 className="text-lg font-extrabold text-[#1A1A1A] group-hover:text-[#5B3AF5] font-manrope leading-snug transition-colors duration-200">
                   Transforming Last-Mile Turnaround
                 </h3>
                 <p className="text-sm text-[#4A4A4A] font-manrope font-normal mt-2 leading-relaxed">

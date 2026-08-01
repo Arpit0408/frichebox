@@ -3,9 +3,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { ScrollTextReveal } from "@/components/ui/scroll-text-reveal";
 import {
   fadeInUp,
-  blurReveal,
   staggerContainer,
   staggerItem,
   defaultViewport,
@@ -19,6 +19,8 @@ export interface SectionHeaderProps {
   theme?: "light" | "dark";
   badgeVariant?: "solid" | "subtle" | "purple";
   className?: string;
+  titleSize?: string;
+  subtitleSize?: string;
   titleClassName?: string;
   subtitleClassName?: string;
   badgeClassName?: string;
@@ -35,6 +37,8 @@ export function SectionHeader({
   theme = "light",
   badgeVariant = "purple",
   className,
+  titleSize = "text-3xl sm:text-4xl md:text-5xl",
+  subtitleSize = "text-sm sm:text-base md:text-lg",
   titleClassName,
   subtitleClassName,
   badgeClassName,
@@ -85,25 +89,40 @@ export function SectionHeader({
               {badge}
             </motion.span>
           )}
-          <motion.h2
-            variants={animate ? blurReveal : undefined}
-            className={cn(
-              "text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight font-manrope tracking-tight",
-              theme === "dark" ? "text-white" : "text-[#111827]",
-              titleClassName,
-            )}
-          >
-            {title}
-          </motion.h2>
+
+          {typeof title === "string" ? (
+            <ScrollTextReveal
+              text={title}
+              as="h2"
+              theme={theme}
+              className={cn(
+                titleSize,
+                "font-extrabold leading-tight font-manrope tracking-tight",
+                titleClassName,
+              )}
+            />
+          ) : (
+            <motion.h2
+              className={cn(
+                titleSize,
+                "font-extrabold leading-tight font-manrope tracking-tight",
+                theme === "dark" ? "text-white" : "text-[#111827]",
+                titleClassName,
+              )}
+            >
+              {title}
+            </motion.h2>
+          )}
         </div>
 
         {subtitle && (
           <motion.div
             variants={animate ? fadeInUp : undefined}
-            className="lg:col-span-5 text-sm sm:text-base font-manrope font-normal leading-relaxed text-left"
+            className="lg:col-span-5 font-manrope font-normal leading-relaxed text-left"
           >
             <p
               className={cn(
+                subtitleSize,
                 theme === "dark" ? "text-neutral-300" : "text-[#4B5563]",
                 subtitleClassName,
               )}
@@ -153,24 +172,42 @@ export function SectionHeader({
       )}
 
       {/* Main Section Heading */}
-      <motion.h2
-        variants={animate ? blurReveal : undefined}
-        className={cn(
-          "text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight font-manrope tracking-tight",
-          theme === "dark" ? "text-white" : "text-[#111827]",
-          maxTitleWidth,
-          titleClassName,
-        )}
-      >
-        {title}
-      </motion.h2>
+      {typeof title === "string" ? (
+        <ScrollTextReveal
+          text={title}
+          as="h2"
+          theme={theme}
+          className={cn(
+            titleSize,
+            "font-extrabold leading-tight font-manrope tracking-tight",
+            isCenter && "justify-center text-center",
+            isRight && "justify-end text-right",
+            align === "left" && "justify-start text-left",
+            maxTitleWidth,
+            titleClassName,
+          )}
+        />
+      ) : (
+        <motion.h2
+          className={cn(
+            titleSize,
+            "font-extrabold leading-tight font-manrope tracking-tight",
+            theme === "dark" ? "text-white" : "text-[#111827]",
+            maxTitleWidth,
+            titleClassName,
+          )}
+        >
+          {title}
+        </motion.h2>
+      )}
 
       {/* Subtitle / Description */}
       {subtitle && (
         <motion.p
           variants={animate ? fadeInUp : undefined}
           className={cn(
-            "mt-4 text-sm sm:text-base md:text-lg font-manrope font-normal leading-relaxed",
+            "mt-4 font-manrope font-normal leading-relaxed",
+            subtitleSize,
             theme === "dark" ? "text-neutral-300" : "text-[#4B5563]",
             maxSubtitleWidth,
             subtitleClassName,

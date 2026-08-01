@@ -1,9 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { LuCheck } from "react-icons/lu";
 import Counter from "@/components/ui/counter";
 import MagneticButton from "@/components/ui/magnetic-button";
+import SectionHeader from "@/components/ui/section-header";
 
 interface InfrastructureOverviewProps {
   topImageSrc?: string;
@@ -12,14 +13,37 @@ interface InfrastructureOverviewProps {
 
 export default function InfrastructureOverview({
   topImageSrc = "/images/infrastructure/tab_wms.svg",
-  bottomRightImageSrc = "/images/about/Frischbox_tracking.png",
+  bottomRightImageSrc = "/images/about/frichebox_tracking.png",
 }: InfrastructureOverviewProps) {
-  const fadeIn = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-  } as const;
+  const fadeIn: Variants = {
+    hidden: { opacity: 0, y: 30, filter: "blur(3px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
+  const checklistContainer: Variants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const checklistItemVariants: Variants = {
+    hidden: { opacity: 0, x: -15 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
 
   const checklistItems = [
     "Smart WMS with AI, barcode scanning, and 15-20 custom reports.",
@@ -31,39 +55,56 @@ export default function InfrastructureOverview({
     <section className="py-20 sm:py-28 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden relative">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* ---------------- Left Column: Title, Subtitle, Checklist & CTA ---------------- */}
+          {/* Left Column: Title, Subtitle, Checklist & CTA */}
           <motion.div
-            {...fadeIn}
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
             className="lg:col-span-6 flex flex-col items-start"
           >
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#111827] font-manrope tracking-tight leading-[1.15] mb-6">
-              Automated, Data-Driven <br className="hidden sm:inline" />
-              Logistics Engineered for <br className="hidden sm:inline" />
-              Scale
-            </h1>
+            <SectionHeader
+              align="left"
+              badge="Overview"
+              badgeVariant="purple"
+              title={
+                <>
+                  Automated, Data-Driven <br className="hidden sm:inline" />
+                  Logistics Engineered for <br className="hidden sm:inline" />
+                  Scale
+                </>
+              }
+              titleSize="text-3xl sm:text-4xl lg:text-5xl"
+              subtitle="We build automated, data-driven warehouses delivering customised solutions that combine compliance, efficiency, and reliability. From real-time software tracking to our physical climate-controlled facility, our infrastructure is specifically designed to minimise delays, eliminate errors, and help brands stay one step ahead."
+              maxTitleWidth="max-w-full"
+              maxSubtitleWidth="max-w-xl"
+              animate={false}
+              className="mb-6 md:mb-6"
+            />
 
-            <p className="text-xs sm:text-sm text-[#4B5563] font-manrope leading-relaxed mb-8 max-w-lg">
-              We build automated, data-driven warehouses delivering customised
-              solutions that combine compliance, efficiency, and reliability.
-              From real-time software tracking to our physical
-              climate-controlled facility, our infrastructure is specifically
-              designed to minimise delays, eliminate errors, and help brands
-              stay one step ahead.
-            </p>
-
-            {/* Checklist */}
-            <div className="space-y-4 mb-10 w-full">
+            {/* Checklist: Staggered Entrance */}
+            <motion.div
+              variants={checklistContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              className="space-y-4 mb-10 w-full"
+            >
               {checklistItems.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-3.5">
-                  <div className="w-5 h-5 rounded-md bg-[#F0EBFF] text-[#5B3AF5] flex items-center justify-center flex-shrink-0 mt-0.5">
+                <motion.div
+                  key={idx}
+                  variants={checklistItemVariants}
+                  className="flex items-start gap-3.5 group cursor-pointer"
+                >
+                  <div className="w-5 h-5 rounded-md bg-[#F0EBFF] text-[#5B3AF5] group-hover:bg-[#5B3AF5] group-hover:text-white group-hover:scale-110 flex items-center justify-center flex-shrink-0 mt-0.5 transition-all duration-300 shadow-sm">
                     <LuCheck className="w-3.5 h-3.5 stroke-[3]" />
                   </div>
-                  <span className="text-xs sm:text-sm font-semibold font-manrope text-[#111827]">
+                  <span className="text-xs sm:text-sm font-semibold font-manrope text-[#111827] group-hover:text-[#5B3AF5] transition-colors duration-200">
                     {item}
                   </span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* CTA Button with Magnetic Cursor Attraction */}
             <MagneticButton
@@ -74,10 +115,12 @@ export default function InfrastructureOverview({
             </MagneticButton>
           </motion.div>
 
-          {/* ---------------- Right Column: Exact 1:1 Matching Bento Frame (Image 1 Target) ---------------- */}
+          {/* Right Column: Bento Frame Image Grid */}
           <motion.div
-            {...fadeIn}
-            transition={{ ...fadeIn.transition, delay: 0.2 }}
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
             className="lg:col-span-6 relative w-full h-[460px] sm:h-[510px]"
           >
             {/* 1. TOP SINGLE L-NOTCHED IMAGE CONTAINER */}
@@ -104,7 +147,7 @@ export default function InfrastructureOverview({
             </div>
 
             {/* 2. BOTTOM-LEFT SOLID PURPLE STAT CARD */}
-            <div className="absolute bottom-0 left-0 w-[55%] sm:w-[56%] h-[165px] sm:h-[180px] bg-[#482BE0] text-white p-6 sm:p-8 rounded-[28px] sm:rounded-[32px] shadow-xl border border-white/20 flex flex-col justify-center items-start z-20">
+            <div className="absolute bottom-0 left-0 w-[55%] sm:w-[56%] h-[165px] sm:h-[180px] bg-[#482BE0] text-white p-6 sm:p-8 rounded-[28px] sm:rounded-[32px] shadow-xl border border-white/20 flex flex-col justify-center items-start z-20 hover:scale-[1.02] transition-transform duration-300">
               <h3 className="text-2xl sm:text-3xl font-extrabold font-manrope text-white mb-2 leading-tight">
                 <Counter value={10000} suffix=" Sq Ft" />
               </h3>
@@ -113,7 +156,7 @@ export default function InfrastructureOverview({
               </p>
             </div>
 
-            {/* 3. BOTTOM-RIGHT VERTICAL IMAGE CONTAINER (Tucks into smooth notch) */}
+            {/* 3. BOTTOM-RIGHT VERTICAL IMAGE CONTAINER */}
             <div className="absolute bottom-0 right-0 w-[41%] sm:w-[42%] h-[260px] sm:h-[265px] rounded-[28px] sm:rounded-[32px] overflow-hidden shadow-2xl border border-neutral-100 group z-20">
               <img
                 src={bottomRightImageSrc}
@@ -121,7 +164,7 @@ export default function InfrastructureOverview({
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src =
-                    "/images/about/Frischbox_tracking.png";
+                    "/images/about/frichebox_tracking.png";
                 }}
               />
             </div>

@@ -244,16 +244,16 @@ export default function Workflow() {
             </div>
           </div>
 
-          {/* MOBILE TIMELINE (Vertical) */}
-          <div className="block md:hidden relative pl-6">
-            {/* Background Inactive Vertical Line */}
-            <div className="absolute top-[20px] bottom-[20px] left-[20px] -translate-x-1/2 w-[2px] border-l-2 border-dashed border-neutral-800 pointer-events-none z-0" />
+          {/* MOBILE TIMELINE (Vertical - 100% Dead-Center Shared Anchor) */}
+          <div className="block md:hidden relative pl-1">
+            {/* Background Inactive Vertical Line (Anchored at left-[24px] -translate-x-1/2) */}
+            <div className="absolute top-[20px] bottom-[25px] left-[24px] -translate-x-1/2 w-[2px] bg-neutral-800 pointer-events-none z-0" />
 
-            {/* Animated Active Vertical Line */}
+            {/* Animated Active Vertical Line (Anchored at left-[24px] -translate-x-1/2) */}
             <motion.div
-              animate={{ height: `${progressPercent * 0.85}%` }}
+              animate={{ height: `${progressPercent * 0.82}%` }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute top-[20px] left-[20px] -translate-x-1/2 w-[2px] bg-gradient-to-b from-[#5B3AF5] via-[#AC9CFF] to-[#5B3AF5] shadow-[0_0_12px_#5B3AF5] pointer-events-none z-0"
+              className="absolute top-[20px] left-[24px] -translate-x-1/2 w-[2px] bg-gradient-to-b from-[#5B3AF5] via-[#AC9CFF] to-[#5B3AF5] shadow-[0_0_14px_#5B3AF5] pointer-events-none z-0"
             />
 
             {/* Vertical Steps */}
@@ -265,10 +265,10 @@ export default function Workflow() {
                     key={step.id}
                     {...fadeIn}
                     onClick={() => setActiveStep(step.id)}
-                    className="flex items-start gap-5 cursor-pointer group"
+                    className="relative pl-16 cursor-pointer group flex flex-col justify-start"
                   >
-                    {/* Node Dot Circle Centered at left-0 */}
-                    <div className="relative flex-shrink-0 mt-0.5">
+                    {/* Node Dot Circle: Anchored at exact same left-[24px] -translate-x-1/2 */}
+                    <div className="absolute left-[24px] -translate-x-1/2 top-0.5 z-10">
                       <div
                         className={`w-10 h-10 rounded-full border-2 flex items-center justify-center bg-[#050312] transition-all duration-500 ${
                           isReached
@@ -288,27 +288,25 @@ export default function Workflow() {
 
                     {/* Step Info */}
                     <div className="flex-1">
-                      <div className="flex items-baseline gap-3 mb-1">
+                      <div className="flex items-baseline gap-2.5 mb-1">
                         <span
-                          className={`text-3xl font-extrabold font-manrope transition-colors duration-300 ${
+                          className={`text-2xl sm:text-3xl font-extrabold font-manrope transition-colors duration-300 ${
                             isReached ? "text-[#AC9CFF]" : "text-white/20"
                           }`}
                         >
                           {step.numberStr}
                         </span>
                         <h3
-                          className={`text-xl font-bold font-manrope transition-colors duration-300 ${
+                          className={`text-lg sm:text-xl font-bold font-manrope transition-colors duration-300 ${
                             isReached ? "text-white" : "text-neutral-400"
                           }`}
                         >
                           {step.title}
                         </h3>
                       </div>
-                      <div className="text-xs sm:text-sm text-neutral-400 font-manrope leading-relaxed space-y-0.5 mt-2">
-                        {step.details.map((line, idx) => (
-                          <p key={idx}>{line}</p>
-                        ))}
-                      </div>
+                      <p className="text-xs sm:text-sm text-neutral-400 font-manrope leading-relaxed mt-1.5">
+                        {step.details.join(" ")}
+                      </p>
                     </div>
                   </motion.div>
                 );

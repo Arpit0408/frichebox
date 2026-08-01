@@ -5,19 +5,23 @@ import { motion } from "framer-motion";
 
 export default function TopFooter() {
   return (
-    <section className="w-full bg-[#482BE0] py-8 sm:py-14 px-6 sm:px-8 lg:px-12">
-      <div className="max-w-7xl mx-auto flex flex-row items-center justify-between gap-4 sm:gap-8">
+    <section className="w-full bg-[#482BE0] py-10 sm:py-16 px-6 sm:px-8 lg:px-12 relative overflow-hidden">
+      {/* Decorative ambient light glow */}
+      <div className="absolute top-[-50%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#5B3AF5]/40 blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-[-50%] right-[-10%] w-[500px] h-[500px] rounded-full bg-violet-500/20 blur-[120px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto flex flex-row items-center justify-between gap-4 sm:gap-8 relative z-10">
         {/* Heading text */}
-        <h3 className="text-xl sm:text-3xl md:text-4xl font-extrabold text-white leading-tight max-w-2xl font-manrope text-left">
+        <h3 className="text-xl sm:text-3xl md:text-4xl font-extrabold text-white leading-tight max-w-2xl font-manrope text-left tracking-tight">
           Partner With Us Today And Let Us Help You Scale Your Brand
         </h3>
 
         {/* Animated Sliding Arrow CTA Button */}
         <Link href="/contact" aria-label="Partner with us" className="flex-shrink-0">
           <motion.div
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
-            className="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 border-2 sm:border-4 border-white rounded-full flex items-center justify-center cursor-pointer transition-colors duration-300 hover:bg-white/10 group overflow-hidden"
+            className="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 border-2 sm:border-4 border-white/90 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/15 hover:border-white shadow-xl shadow-black/10 group overflow-hidden"
           >
             {/* Arrow icon box */}
             <div className="relative overflow-hidden w-6 h-6 sm:w-8 sm:h-8">

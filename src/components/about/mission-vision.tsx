@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 
 interface MissionVisionProps {
@@ -14,28 +14,48 @@ export default function MissionVision({
   operatorsImage = "/images/about/mission_operators.png",
   ctaBgImage = "/images/about/mission_cta.png",
 }: MissionVisionProps) {
-  const fadeIn = {
-    initial: { opacity: 0, y: 25 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-80px" },
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-  } as const;
+  const containerVariants: Variants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 30, filter: "blur(3px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
 
   return (
-    <section className="py-14 sm:py-20 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden">
+    <section className="py-14 sm:py-20 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden relative">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch"
+        >
           {/* Left & Center Columns Container  */}
           <div className="lg:col-span-9 flex flex-col gap-6">
             {/* Top Row: Mission Card  */}
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-stretch">
               {/* Card 1: Our Mission */}
               <motion.div
-                {...fadeIn}
-                className="sm:col-span-7 bg-[#482BE0] text-white p-7 sm:p-9 rounded-[28px] shadow-lg flex flex-col justify-center relative overflow-hidden h-[200px] sm:h-[260px]"
+                variants={cardVariants}
+                className="sm:col-span-7 bg-[#482BE0] hover:bg-[#381EC8] text-white p-7 sm:p-9 rounded-[28px] shadow-lg hover:shadow-2xl flex flex-col justify-center relative overflow-hidden h-[220px] sm:h-[260px] transition-all duration-300 group cursor-pointer"
               >
                 <div className="relative z-10">
-                  <h3 className="text-2xl sm:text-3xl font-extrabold font-manrope text-white mb-4">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold font-manrope text-white mb-3 tracking-tight group-hover:translate-x-1 transition-transform duration-200">
                     Our Mission
                   </h3>
                   <p className="text-xs sm:text-sm font-manrope text-white/90 leading-relaxed font-normal">
@@ -51,7 +71,7 @@ export default function MissionVision({
 
               {/* Card 2: Vertical Warehouse Racks Image */}
               <motion.div
-                {...fadeIn}
+                variants={cardVariants}
                 className="sm:col-span-5 rounded-[28px] overflow-hidden shadow-lg h-[200px] sm:h-[260px] relative group"
               >
                 <img
@@ -68,7 +88,7 @@ export default function MissionVision({
 
             {/* Bottom Row: Wide Warehouse Operators Image */}
             <motion.div
-              {...fadeIn}
+              variants={cardVariants}
               className="rounded-[28px] overflow-hidden shadow-lg h-[220px] sm:h-[335px] relative group"
             >
               <img
@@ -83,15 +103,15 @@ export default function MissionVision({
             </motion.div>
           </div>
 
-          {/* Right Column Container*/}
+          {/* Right Column Container */}
           <div className="lg:col-span-3 flex flex-col gap-6">
             {/* Card 3: Our Vision */}
             <motion.div
-              {...fadeIn}
-              className="bg-[#482BE0] text-white p-7 sm:p-9 rounded-[28px] shadow-lg flex flex-col justify-center relative overflow-hidden h-[340px] sm:h-[360px]"
+              variants={cardVariants}
+              className="bg-[#482BE0] hover:bg-[#381EC8] text-white p-7 sm:p-9 rounded-[28px] shadow-lg hover:shadow-2xl flex flex-col justify-center relative overflow-hidden h-[240px] sm:h-[360px] transition-all duration-300 group cursor-pointer"
             >
               <div className="relative z-10">
-                <h3 className="text-2xl sm:text-3xl font-extrabold font-manrope text-white mb-4">
+                <h3 className="text-2xl sm:text-3xl font-extrabold font-manrope text-white mb-3 tracking-tight group-hover:translate-x-1 transition-transform duration-200">
                   Our Vision
                 </h3>
                 <p className="text-xs sm:text-sm font-manrope text-white/90 leading-relaxed font-normal">
@@ -105,8 +125,8 @@ export default function MissionVision({
               </div>
             </motion.div>
 
-            {/* Card 5: Work With Us CTA Card */}
-            <motion.div {...fadeIn}>
+            {/* Card 4: Work With Us CTA Card */}
+            <motion.div variants={cardVariants}>
               <Link
                 href="/contact"
                 className="relative rounded-[28px] overflow-hidden shadow-lg h-[220px] sm:h-[235px] flex flex-col items-center justify-center text-center p-6 group cursor-pointer block"
@@ -126,7 +146,7 @@ export default function MissionVision({
                 {/* Content */}
                 <div className="relative z-10 flex flex-col items-center justify-center">
                   {/* Isometric Box Icon */}
-                  <div className="w-11 h-11 flex items-center justify-center mb-2 drop-shadow-md">
+                  <div className="w-11 h-11 flex items-center justify-center mb-2 drop-shadow-md group-hover:scale-110 transition-transform duration-300">
                     <img
                       src="/logo/frichebox_icon.svg"
                       alt="Frichebox Icon"
@@ -140,7 +160,7 @@ export default function MissionVision({
               </Link>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

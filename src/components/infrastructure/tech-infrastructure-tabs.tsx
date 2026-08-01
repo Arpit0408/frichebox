@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
+import SectionHeader from "@/components/ui/section-header";
 
 interface TechTabItem {
   id: number;
@@ -20,7 +21,7 @@ const techTabsData: TechTabItem[] = [
     description:
       "We utilise a comprehensive smart warehouse automation stack powered by advanced WMS platforms to maximise speed and accuracy across all operations. This includes AI-driven order allocation to eliminate errors and auto e-Waybill generation for streamlined, compliant dispatch.",
     imageSrc: "/images/infrastructure/tab_wms.svg",
-    fallbackImage: "/images/about/Frischbox_tracking.png",
+    fallbackImage: "/images/about/frichebox_tracking.png",
   },
   {
     id: 2,
@@ -63,35 +64,52 @@ const techTabsData: TechTabItem[] = [
 export default function TechInfrastructureTabs() {
   const [activeTabId, setActiveTabId] = useState<number>(1);
 
-  const fadeIn = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-  } as const;
+  const fadeIn: Variants = {
+    hidden: { opacity: 0, y: 30, filter: "blur(3px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
 
   const currentTab =
     techTabsData.find((tab) => tab.id === activeTabId) || techTabsData[0];
 
   return (
     <section className="w-full bg-[#050312] text-white py-20 sm:py-28 px-6 sm:px-8 lg:px-12 overflow-hidden relative">
+      {/* Decorative background ambient glow */}
+      <div className="absolute top-[20%] right-[-10%] w-[450px] h-[450px] rounded-full bg-[#5B3AF5]/15 blur-[130px] pointer-events-none" />
+
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* ---------------- Left Column: Header & Interactive Pill Tabs ---------------- */}
+          {/* Left Column: Header & Interactive Pill Tabs */}
           <motion.div
-            {...fadeIn}
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
             className="lg:col-span-7 flex flex-col items-start"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white font-manrope tracking-tight leading-tight mb-4">
-              Technology & <br />
-              Infrastructure
-            </h2>
-
-            <p className="text-xs sm:text-sm text-neutral-300 font-manrope leading-relaxed mb-8 max-w-xl">
-              Our modern facility leverages an advanced automation stack and
-              robust physical infrastructure to eliminate errors, minimise
-              delays, and scale effortlessly as your business expands.
-            </p>
+            <SectionHeader
+              align="left"
+              theme="dark"
+              badge="Core Tech Stack"
+              badgeVariant="solid"
+              title={
+                <>
+                  Technology &amp; <br />
+                  Infrastructure
+                </>
+              }
+              titleSize="text-3xl sm:text-4xl lg:text-5xl"
+              subtitle="Our modern facility leverages an advanced automation stack and robust physical infrastructure to eliminate errors, minimise delays, and scale effortlessly as your business expands."
+              maxTitleWidth="max-w-full"
+              maxSubtitleWidth="max-w-xl"
+              animate={false}
+              className="mb-6 md:mb-6"
+            />
 
             {/* 5 Interactive Pill Buttons */}
             <div className="flex flex-col gap-3.5 w-full max-w-xl">
@@ -125,12 +143,15 @@ export default function TechInfrastructureTabs() {
             </div>
           </motion.div>
 
+          {/* Right Column: Tab Preview Card */}
           <motion.div
-            {...fadeIn}
-            transition={{ ...fadeIn.transition, delay: 0.2 }}
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
             className="lg:col-span-5 w-full"
           >
-            {/* Static Permanent Outer White Card */}
+            {/* Outer White Card */}
             <div className="bg-white rounded-[32px] overflow-hidden shadow-2xl text-neutral-900 flex flex-col border border-neutral-100">
               {/* Top Image Slot */}
               <div className="h-[250px] sm:h-[300px] w-full overflow-hidden relative bg-neutral-100">

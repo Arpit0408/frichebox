@@ -1,35 +1,46 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { LuCheck } from "react-icons/lu";
-import { AnimateIcon } from "@/components/ui/animate-icon";
+import { motion, Variants } from "framer-motion";
+import { LuCheck, LuShieldCheck } from "react-icons/lu";
 import { SectionHeader } from "@/components/ui/section-header";
-import {
-  fadeInUp,
-  fadeInRight,
-  staggerContainer,
-  staggerItem,
-  defaultViewport,
-} from "@/lib/animations";
 
 export default function WhyChooseUs() {
-  // Animation presets
-  const fadeIn = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-  } as const;
-
-  const staggerContainer = {
-    initial: {},
-    whileInView: {
+  const checklistContainer: Variants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
       },
     },
-    viewport: { once: true, margin: "-100px" },
-  } as const;
+  };
+
+  const checklistItemVariants: Variants = {
+    hidden: { opacity: 0, x: -20, filter: "blur(3px)" },
+    visible: {
+      opacity: 1,
+      x: 0,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
+
+  const imageFadeIn: Variants = {
+    hidden: { opacity: 0, y: 30, scale: 0.96 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
 
   const checklistItems = [
     { id: 1, label: "Built For Health & Wellness" },
@@ -41,8 +52,11 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="py-12 sm:py-24 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-12 sm:py-24 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden relative">
+      {/* Decorative ambient background glow */}
+      <div className="absolute top-[30%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#5B3AF5]/5 blur-[120px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Text & Features (col-span-7) */}
           <div className="lg:col-span-7 flex flex-col items-start">
@@ -56,27 +70,25 @@ export default function WhyChooseUs() {
               maxSubtitleWidth="max-w-xl"
               className="mb-0"
             />
+
+            {/* Checklist Items: 1-by-1 Staggered Entrance */}
             <motion.div
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="whileInView"
-              viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full pt-4 sm:pt-0"
+              variants={checklistContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4.5 w-full pt-4 sm:pt-2"
             >
               {checklistItems.map((item) => (
                 <motion.div
                   key={item.id}
-                  variants={fadeIn}
-                  whileHover="hover"
+                  variants={checklistItemVariants}
                   className="flex items-center gap-3.5 group cursor-pointer"
                 >
-                  {/* Purple Check icon wrapper */}
-                  <AnimateIcon
-                    animateOnHover
-                    className="flex-shrink-0 w-5 h-5 rounded-md bg-indigo-50 text-[#482BE0]"
-                  >
-                    <LuCheck className="w-3.5 h-3.5 stroke-[3] text-[#482BE0]" />
-                  </AnimateIcon>
+                  {/* Icon Wrapper with fill effect on hover */}
+                  <div className="flex-shrink-0 w-6 h-6 rounded-lg bg-indigo-50 text-[#482BE0] group-hover:bg-[#482BE0] group-hover:text-white group-hover:scale-110 flex items-center justify-center transition-all duration-300 shadow-sm">
+                    <LuCheck className="w-3.5 h-3.5 stroke-[3]" />
+                  </div>
                   {/* Label */}
                   <span className="text-sm sm:text-base font-semibold text-neutral-800 font-manrope group-hover:text-[#482BE0] transition-colors duration-200">
                     {item.label}
@@ -86,16 +98,21 @@ export default function WhyChooseUs() {
             </motion.div>
           </div>
 
-          {/* Right Column: Worker Warehouse Image (col-span-5) */}
+          {/* Right Column: Image Card with Floating Badge (col-span-5) */}
           <motion.div
-            {...fadeIn}
-            className="lg:col-span-5 relative w-full aspect-[4/3] sm:aspect-[4/3] lg:h-[480px] overflow-hidden rounded-3xl group shadow-lg shadow-neutral-100"
+            variants={imageFadeIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="lg:col-span-5 relative w-full aspect-[4/3] sm:aspect-[4/3] lg:h-[480px] overflow-hidden rounded-3xl group shadow-2xl shadow-neutral-200/60"
           >
             <img
               src="/images/home/why_choose_us.png"
               alt="Frischbox Warehouse Operator smiling"
               className="w-full h-full object-cover rounded-3xl transition-transform duration-700 group-hover:scale-105"
             />
+
+         
           </motion.div>
         </div>
       </div>

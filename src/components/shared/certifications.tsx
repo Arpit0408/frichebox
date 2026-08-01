@@ -27,7 +27,7 @@ export default function Certifications() {
   } as const;
 
   return (
-    <section className="pb-20 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden">
+    <section className="pb-20 px-6 sm:px-8 lg:px-12 bg-white text-neutral-900 overflow-hidden relative">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
         <SectionHeader
           badge="Our Certifications"
@@ -70,7 +70,7 @@ export default function Certifications() {
           </motion.div>
         </div>
 
-        {/* Desktop View: Static Grid Layout (hidden md:flex) */}
+        {/* Desktop View: Interactive Grid Layout (hidden md:flex) */}
         <motion.div
           {...fadeIn}
           className="hidden md:flex flex-wrap items-center justify-center gap-8 sm:gap-12 lg:gap-14 mt-8 w-full"
@@ -78,12 +78,12 @@ export default function Certifications() {
           {certifications.map((item) => (
             <div
               key={item.id}
-              className="flex items-center justify-center p-2 sm:p-3 transition-all duration-300 transform hover:scale-105"
+              className="flex items-center justify-center p-3 sm:p-4 rounded-2xl transition-all duration-300 transform hover:scale-110 hover:drop-shadow-[0_8px_20px_rgba(91,58,245,0.2)] group cursor-pointer"
             >
               <img
                 src={item.image}
                 alt={item.name}
-                className="h-16 sm:h-20 w-auto object-contain"
+                className="h-16 sm:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </div>
           ))}

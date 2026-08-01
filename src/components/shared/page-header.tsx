@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { cn } from "@/lib/utils";
 import CircularBadge from "@/components/ui/circular-badge";
 
@@ -26,6 +27,27 @@ export default function PageHeader({
   className,
   showCircularBadge = true,
 }: PageHeaderProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Scroll Progress Binding
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const smoothScroll = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 25,
+    restDelta: 0.001,
+  });
+
+  // Parallax Text Movement: Title glides UP & fades out smoothly on scroll
+  const textY = useTransform(smoothScroll, [0, 1], ["0px", "-45px"]);
+  const textOpacity = useTransform(smoothScroll, [0, 0.75], [1, 0]);
+
+  // Ambient Glow Parallax: Glow orbs drift DOWN smoothly
+  const glowY = useTransform(smoothScroll, [0, 1], ["0px", "60px"]);
+
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -41,8 +63,9 @@ export default function PageHeader({
 
   return (
     <section
+      ref={containerRef}
       className={cn(
-        "relative w-full pt-28 pb-20 sm:pt-36 sm:pb-24 px-6 sm:px-8 lg:px-12 text-white overflow-visible mb-4 sm:mb-20",
+        "relative w-full pt-28 pb-20 sm:pt-36 sm:pb-24 px-6 sm:px-8 lg:px-12 text-white overflow-visible mb-4 sm:mb-20 z-20",
         className,
       )}
       style={{
@@ -50,11 +73,21 @@ export default function PageHeader({
         borderBottom: "6px solid #5B3AF5",
       }}
     >
-      {/* Decorative Glow Lights */}
-      <div className="absolute top-[-20%] right-[-10%] w-[450px] h-[450px] rounded-full  blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full  blur-[120px] pointer-events-none" />
+      {/* Decorative Glow Lights (Parallax Drift) */}
+      <motion.div
+        style={{ y: glowY }}
+        className="absolute top-[-20%] right-[-10%] w-[450px] h-[450px] rounded-full bg-[#5B3AF5]/20 blur-[130px] pointer-events-none"
+      />
+      <motion.div
+        style={{ y: glowY }}
+        className="absolute bottom-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#482BE0]/25 blur-[120px] pointer-events-none"
+      />
 
-      <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
+      {/* Foreground Content (Parallax Lift & Fade) */}
+      <motion.div
+        style={{ y: textY, opacity: textOpacity }}
+        className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center"
+      >
         {/* Optional Badge */}
         {badge && (
           <motion.span
@@ -83,16 +116,18 @@ export default function PageHeader({
             {description}
           </motion.p>
         )}
-      </div>
+      </motion.div>
 
       {/* Centered Rotating Circular Badge on Bottom Border */}
       {showCircularBadge && (
-        <div
+        <motion.div
           onClick={scrollToNext}
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-30 cursor-pointer"
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-40 cursor-pointer drop-shadow-[0_0_25px_rgba(91,58,245,0.5)] hover:drop-shadow-[0_0_35px_rgba(91,58,245,0.8)] transition-all duration-300"
         >
           <CircularBadge logoSrc="/logo/frichebox_icon.svg" />
-        </div>
+        </motion.div>
       )}
     </section>
   );
