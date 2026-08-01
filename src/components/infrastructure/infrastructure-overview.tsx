@@ -1,12 +1,43 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import { LuCheck } from "react-icons/lu";
-import Counter from "@/components/ui/counter";
-import MagneticButton from "@/components/ui/magnetic-button";
 import SectionHeader from "@/components/ui/section-header";
+import MagneticButton from "@/components/ui/magnetic-button";
 
-interface InfrastructureOverviewProps {
+function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const duration = 2000;
+    const stepTime = 20;
+    const steps = duration / stepTime;
+    const increment = value / steps;
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= value) {
+        setCount(value);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [value]);
+
+  return (
+    <span>
+      {count.toLocaleString()}
+      {suffix}
+    </span>
+  );
+}
+
+export interface InfrastructureOverviewProps {
   topImageSrc?: string;
   bottomRightImageSrc?: string;
 }
@@ -121,52 +152,94 @@ export default function InfrastructureOverview({
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="lg:col-span-6 relative w-full h-[460px] sm:h-[510px]"
+            className="lg:col-span-6 w-full"
           >
-            {/* 1. TOP SINGLE L-NOTCHED IMAGE CONTAINER */}
-            <div
-              className="absolute top-0 left-0 w-full h-[320px] sm:h-[315px] z-10 group overflow-hidden"
-              style={{
-                WebkitMaskImage: "url('/Subtract.png')",
-                maskImage: "url('/Subtract.png')",
-                WebkitMaskSize: "100% 100%",
-                maskSize: "100% 100%",
-                WebkitMaskRepeat: "no-repeat",
-                maskRepeat: "no-repeat",
-              }}
-            >
-              <img
-                src={topImageSrc}
-                alt="Frischbox warehouse facility overview"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src =
-                    "/images/home/hero_1.png";
-                }}
-              />
+            {/* ---------------- MOBILE LAYOUT (Clean Stacked Cards) ---------------- */}
+            <div className="block sm:hidden space-y-4 w-full">
+              {/* 1. Top Image */}
+              <div className="w-full h-[230px] rounded-3xl overflow-hidden shadow-xl border border-neutral-100 relative group">
+                <img
+                  src={topImageSrc}
+                  alt="Frischbox warehouse facility overview"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src =
+                      "/images/home/hero_1.png";
+                  }}
+                />
+              </div>
+
+              {/* 2. Purple Stat Card */}
+              <div className="w-full bg-[#482BE0] text-white p-6 rounded-3xl shadow-xl border border-white/20 flex flex-col justify-center items-start">
+                <h3 className="text-2xl font-extrabold font-manrope text-white mb-1.5 leading-tight">
+                  <Counter value={10000} suffix=" Sq Ft" />
+                </h3>
+                <p className="text-xs font-manrope text-white/90 leading-snug">
+                  Expandable, Built-for-Precision Facility
+                </p>
+              </div>
+
+              {/* 3. Bottom Tracking Image */}
+              <div className="w-full h-[210px] rounded-3xl overflow-hidden shadow-xl border border-neutral-100 relative group">
+                <img
+                  src={bottomRightImageSrc}
+                  alt="Frischbox WMS software and inventory tracking"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src =
+                      "/images/about/frichebox_tracking.png";
+                  }}
+                />
+              </div>
             </div>
 
-            {/* 2. BOTTOM-LEFT SOLID PURPLE STAT CARD */}
-            <div className="absolute bottom-0 left-0 w-[55%] sm:w-[56%] h-[165px] sm:h-[180px] bg-[#482BE0] text-white p-6 sm:p-8 rounded-[28px] sm:rounded-[32px] shadow-xl border border-white/20 flex flex-col justify-center items-start z-20 hover:scale-[1.02] transition-transform duration-300">
-              <h3 className="text-2xl sm:text-3xl font-extrabold font-manrope text-white mb-2 leading-tight">
-                <Counter value={10000} suffix=" Sq Ft" />
-              </h3>
-              <p className="text-xs sm:text-sm font-manrope text-white/90 leading-snug">
-                Expandable, Built-for-Precision Facility
-              </p>
-            </div>
-
-            {/* 3. BOTTOM-RIGHT VERTICAL IMAGE CONTAINER */}
-            <div className="absolute bottom-0 right-0 w-[41%] sm:w-[42%] h-[260px] sm:h-[265px] rounded-[28px] sm:rounded-[32px] overflow-hidden shadow-2xl border border-neutral-100 group z-20">
-              <img
-                src={bottomRightImageSrc}
-                alt="Frischbox WMS software and inventory tracking"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src =
-                    "/images/about/frichebox_tracking.png";
+            {/* ---------------- DESKTOP LAYOUT (Notched Bento Mask with 16px Equal Gaps) ---------------- */}
+            <div className="hidden sm:block relative w-full h-[512px]">
+              {/* 1. TOP SINGLE L-NOTCHED IMAGE CONTAINER */}
+              <div
+                className="absolute top-0 left-0 w-full h-[320px] sm:h-[315px] z-10 group overflow-hidden"
+                style={{
+                  WebkitMaskImage: "url('/Subtract.png')",
+                  maskImage: "url('/Subtract.png')",
+                  WebkitMaskSize: "100% 100%",
+                  maskSize: "100% 100%",
+                  WebkitMaskRepeat: "no-repeat",
+                  maskRepeat: "no-repeat",
                 }}
-              />
+              >
+                <img
+                  src={topImageSrc}
+                  alt="Frischbox warehouse facility overview"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src =
+                      "/images/home/hero_1.png";
+                  }}
+                />
+              </div>
+
+              {/* 2. BOTTOM-LEFT SOLID PURPLE STAT CARD */}
+              <div className="absolute bottom-0 left-0 w-[55%] sm:w-[56%] h-[165px] sm:h-[180px] bg-[#482BE0] text-white p-6 sm:p-8 rounded-[28px] sm:rounded-[32px] shadow-xl border border-white/20 flex flex-col justify-center items-start z-20 hover:scale-[1.02] transition-transform duration-300">
+                <h3 className="text-2xl sm:text-3xl font-extrabold font-manrope text-white mb-2 leading-tight">
+                  <Counter value={10000} suffix=" Sq Ft" />
+                </h3>
+                <p className="text-xs sm:text-sm font-manrope text-white/90 leading-snug">
+                  Expandable, Built-for-Precision Facility
+                </p>
+              </div>
+
+              {/* 3. BOTTOM-RIGHT VERTICAL IMAGE CONTAINER */}
+              <div className="absolute bottom-0 right-0 w-[41%] sm:w-[41%] h-[260px] sm:h-[265px] rounded-[28px] sm:rounded-[32px] overflow-hidden shadow-2xl border border-neutral-100 group z-20">
+                <img
+                  src={bottomRightImageSrc}
+                  alt="Frischbox WMS software and inventory tracking"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src =
+                      "/images/about/frichebox_tracking.png";
+                  }}
+                />
+              </div>
             </div>
           </motion.div>
         </div>
