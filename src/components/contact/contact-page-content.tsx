@@ -62,7 +62,7 @@ export default function ContactPageContent() {
   return (
     <div className="w-full bg-white text-neutral-900 overflow-hidden pt-12 pb-20">
       {/* ---------------- PART 1: Top 3 Contact Cards ---------------- */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative mb-16">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative mb-16 sm:mb-30">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -245,7 +245,8 @@ export default function ContactPageContent() {
                 htmlFor="saveInfo"
                 className="text-xs text-neutral-500 font-manrope cursor-pointer select-none"
               >
-                Save my information in this browser for future consultation requests
+                Save my information in this browser for future consultation
+                requests
               </label>
             </div>
 

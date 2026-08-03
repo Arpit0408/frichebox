@@ -131,7 +131,7 @@ export default function Hero() {
         onClick={scrollToNext}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[15%] sm:translate-y-[36%] z-50 cursor-pointer drop-shadow-[0_0_25px_rgba(91,58,245,0.6)] hover:drop-shadow-[0_0_35px_rgba(91,58,245,0.9)] transition-all duration-300"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[38%] sm:translate-y-[36%] z-50 cursor-pointer drop-shadow-[0_0_25px_rgba(91,58,245,0.6)] hover:drop-shadow-[0_0_35px_rgba(91,58,245,0.9)] transition-all duration-300"
       >
         <CircularBadge logoSrc="/logo/frichebox_icon.svg" />
       </motion.div>

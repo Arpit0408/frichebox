@@ -101,15 +101,26 @@ export default function Footer() {
                   <span>frishbox25@gmail.com</span>
                 </a>
 
-                <a
-                  href="tel:+919873175173"
-                  className="flex items-start gap-3 text-sm sm:text-base text-neutral-300 hover:text-white font-manrope font-medium transition-colors duration-200 group"
-                >
-                  <div className="w-8 h-8 rounded-full bg-white/10 group-hover:bg-[#5B3AF5] flex items-center justify-center transition-colors duration-200 text-white flex-shrink-0 mt-0.5">
+                <div className="flex items-center gap-3 text-xs sm:text-base text-neutral-300 font-manrope font-medium group">
+                  <div className="w-8 h-8 rounded-full bg-white/10 group-hover:bg-[#5B3AF5] flex items-center justify-center transition-colors duration-200 text-white flex-shrink-0">
                     <LuPhone className="w-4 h-4" />
                   </div>
-                  <span>+91 9873175173 | +91 7838084543</span>
-                </a>
+                  <div className="flex items-center gap-1.5 sm:gap-2 flex-nowrap whitespace-nowrap">
+                    <a
+                      href="tel:+919873175173"
+                      className="hover:text-white transition-colors duration-200"
+                    >
+                      +91 9873175173
+                    </a>
+                    <span className="text-neutral-500">|</span>
+                    <a
+                      href="tel:+917838084543"
+                      className="hover:text-white transition-colors duration-200"
+                    >
+                      +91 7838084543
+                    </a>
+                  </div>
+                </div>
 
                 <div className="flex items-start gap-3 text-sm sm:text-base text-neutral-300 font-manrope font-medium leading-relaxed mt-3">
                   <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white flex-shrink-0 mt-0.5">
